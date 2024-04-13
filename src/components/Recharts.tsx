@@ -1,0 +1,185 @@
+import   {useEffect, useState} from 'react'
+import {
+    CartesianGrid,
+    Tooltip,
+    XAxis,
+    YAxis,
+    AreaChart,
+    Area,
+
+  } from "recharts";
+import Data from '../libs/data'
+import { Activity, DollarSign, PanelTop } from 'lucide-react';
+import initialGraphData from '../libs/graphData'
+
+ 
+const Recharts = ({
+  sendDataToParent
+}: {
+  sendDataToParent: (data: unknown) => void
+}) => {
+  const [year, setYear] = useState('2017')
+  const [grandTotal, setGrandTotal] = useState(0)
+  const [itemsSold, setItemsSold] = useState(0)
+  const [profit, setProfit] = useState(0)
+  const [graphData] = useState(initialGraphData)
+
+  const stats = [
+    { id: 1, name: 'Total Sales', stat: grandTotal.toFixed(3), icon: DollarSign },
+    { id: 2, name: 'Items sold', stat: itemsSold, icon: PanelTop },
+    { id: 3, name: 'Overall Profit', stat: profit.toFixed(2), icon: Activity },
+  ]
+  useEffect(() => {
+    graphData.map((item)=>{
+      item.Total = 0
+      item.Profit = 0
+      item.itemsSold = 0
+      item.Profit_ratio = 0
+    })
+    Data.map((item) => {
+      if (item.Order_Date.split("-")[2] == year) {
+        const month = item.Order_Date.split("-")[1];
+        graphData[Number(month) - 1].Total = graphData[Number(month) - 1].Total + Number(item.Sales);
+        graphData[Number(month) - 1].Profit = graphData[Number(month) - 1].Profit + Number(item.Profit);
+        graphData[Number(month) - 1].itemsSold = graphData[Number(month) - 1].itemsSold + Number(item.Quantity);
+        graphData[Number(month) - 1].region?.map((region) => { 
+          if (region && region.name == item.Region) { 
+            region.value = region.value + Number(item.Sales);
+          }
+        });
+      }
+    });
+
+    graphData.map((item): void => {
+      item.Profit_ratio = parseFloat((item.Profit/item.Total).toFixed(3));
+    });
+
+    setProfit(graphData.reduce((acc, item) => acc + item.Profit, 0));
+    setItemsSold(graphData.reduce((acc, item) => acc + item.itemsSold, 0));
+    setGrandTotal(graphData.reduce((acc, item) => acc + item.Total, 0))
+    const regionData ={
+      south: 0,
+      central: 0,
+      east: 0,
+      west: 0
+    }
+    graphData.map((item) => {
+      
+      item.region?.map((region) => {
+        if(region.name == 'South'){
+          regionData.south = region.value
+        }
+        if(region.name == 'Central'){
+          regionData.central = region.value
+        }
+        if(region.name == 'East'){
+          regionData.east = region.value
+        }
+        if(region.name == 'West'){
+          regionData.west = region.value
+        }
+      })
+    })
+    sendDataToParent(regionData)
+  }
+  ,[year])
+
+
+  return (
+  <div className='overflow-hidden'>
+    <div className="flow-root mb-4">
+        <div className="float-left ml-6">
+             <h1 className="text-2xl font-bold">Dashboard</h1>
+        </div>
+        
+        <div className="float-right mr-6">
+          <select
+            id="location"
+            name="location"
+            className="text-lg block rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 sm:text-sm sm:leading-6"
+            defaultValue="2017"
+            onChange={(e) => setYear(e.target.value)}
+          >
+            <option>2017</option>
+            <option>2016</option>
+            <option>2015</option>
+          </select>
+        </div>
+
+    </div>
+
+    <div className=''>
+      <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {stats.map((item) => (
+          <div
+            key={item.id}
+            className=" overflow-hidden rounded-lg bg-gray-50 px-4 pb-2 pt-2 shadow sm:px-6 sm:pt-6"
+          >
+            <dt>
+              <div className="absolute rounded-md bg-[#8884d8] p-3">
+                <item.icon className="h-6 w-6 text-white" aria-hidden="true" />
+              </div>
+              <p className="ml-16 truncate text-sm font-medium text-gray-500">{item.name}</p>
+            </dt>
+            <dd className="ml-16 flex items-baseline pb-6 sm:pb-7">
+              {item.id  == 2 ? <p className="text-2xl font-semibold text-gray-900">{item.stat}</p>:<p className="text-2xl font-semibold text-gray-900">${item.stat}</p>}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+
+
+
+{/* Profit Ratio*/}
+  <div className="flex items-center justify-center mt-2">
+    <h2 className='text-2xl '>Profit Ratio</h2>
+  </div>
+  <div className="flex items-center justify-center bg-gray-50">
+  <AreaChart width={1000} height={350} data={graphData}
+  margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
+  <defs>
+    <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
+      <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+    </linearGradient>
+    <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8}/>
+      <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
+    </linearGradient>
+  </defs>
+  <XAxis dataKey="Data" />
+  <YAxis type="number"  unit={'%'}/>
+  <CartesianGrid strokeDasharray="3 3" vertical={false} horizontal={false}/>
+  <Tooltip />
+  <Area type="monotone" dataKey="Profit_ratio" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" dot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 2,r:2}} activeDot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 5,r:10}}/>
+  </AreaChart>
+  </div>
+
+
+  <div className="flex items-center justify-center mt-4">
+    <h2 className='text-2xl '>Accumulated sales</h2>
+  </div>
+  <AreaChart width={1000} height={350} data={graphData}
+  margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
+  <defs>
+    <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
+      <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+    </linearGradient>
+    <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8}/>
+      <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
+    </linearGradient>
+  </defs>
+  <XAxis dataKey="Data" />
+  <YAxis type="number" unit={'$'}/>
+  <CartesianGrid strokeDasharray="3 3" vertical={false} horizontal={false}/>
+  <Tooltip />
+  <Area type="monotone" dataKey="Total" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" dot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 2,r:2}} activeDot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 5,r:10}}/>
+  </AreaChart>
+
+</div>
+)}
+
+export default Recharts
