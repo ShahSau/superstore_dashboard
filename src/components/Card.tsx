@@ -2,7 +2,7 @@ import {  MoveUpRight, ScatterChart, Table } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 const projects = [
     { name: 'Table', initials: Table, href: '/table',desc:"DataTable page",  bgColor: 'bg-violet-500' },
-    { name: 'Graphs', initials: ScatterChart, href: '/graph',desc:"Graph page", bgColor: 'bg-emerald-700' },
+    { name: 'Graphs', initials: ScatterChart, href: '/graph',desc:"Graph page", bgColor: 'bg-violet-700' },
   ]
   
   function classNames(...classes: string[]) {

@@ -96,7 +96,7 @@ const Recharts = ({
           <select
             id="location"
             name="location"
-            className="text-lg block rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 sm:text-sm sm:leading-6"
+            className="text-lg block cursor-pointer bg-[#8884d8] rounded-md border-l border-gray-200 py-2 pl-4 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 sm:text-sm sm:leading-6"
             defaultValue="2017"
             onChange={(e) => setYear(e.target.value)}
           >
