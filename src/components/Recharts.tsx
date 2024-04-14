@@ -37,8 +37,8 @@ const Recharts = ({
       item.Profit_ratio = 0
     })
     Data.map((item) => {
-      if (item.Order_Date.split("-")[2] == year) {
-        const month = item.Order_Date.split("-")[1];
+      if (item.Order_Date.split("-")[2] == year) { //here
+        const month = item.Order_Date.split("-")[1]; //here
         graphData[Number(month) - 1].Total = graphData[Number(month) - 1].Total + Number(item.Sales);
         graphData[Number(month) - 1].Profit = graphData[Number(month) - 1].Profit + Number(item.Profit);
         graphData[Number(month) - 1].itemsSold = graphData[Number(month) - 1].itemsSold + Number(item.Quantity);
@@ -136,24 +136,24 @@ const Recharts = ({
     <h2 className='text-2xl '>Profit Ratio</h2>
   </div>
   <div className="flex items-center justify-center bg-gray-50">
-  <AreaChart width={1000} height={350} data={graphData}
-  margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
-  <defs>
-    <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
-      <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
-    </linearGradient>
-    <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8}/>
-      <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
-    </linearGradient>
-  </defs>
-  <XAxis dataKey="Data" />
-  <YAxis type="number"  unit={'%'}/>
-  <CartesianGrid strokeDasharray="3 3" vertical={false} horizontal={false}/>
-  <Tooltip />
-  <Area type="monotone" dataKey="Profit_ratio" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" dot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 2,r:2}} activeDot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 5,r:10}}/>
-  </AreaChart>
+    <AreaChart width={1000} height={350} data={graphData}
+    margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
+    <defs>
+      <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
+        <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+      </linearGradient>
+      <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8}/>
+        <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
+      </linearGradient>
+    </defs>
+    <XAxis dataKey="Data" />
+    <YAxis type="number"  unit={'%'}/>
+    <CartesianGrid strokeDasharray="3 3" vertical={false} horizontal={false}/>
+    <Tooltip />
+    <Area type="monotone" dataKey="Profit_ratio" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" dot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 2,r:2}} activeDot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 5,r:10}}/>
+    </AreaChart>
   </div>
 
 
@@ -161,24 +161,24 @@ const Recharts = ({
     <h2 className='text-2xl '>Accumulated sales</h2>
   </div>
   <div className="flex items-center justify-center bg-gray-50">
-  <AreaChart width={1000} height={350} data={graphData}
-  margin={{ top: 6, right: 30, left: 12, bottom: 0 }}>
-  <defs>
-    <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
-      <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
-    </linearGradient>
-    <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8}/>
-      <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
-    </linearGradient>
-  </defs>
-  <XAxis dataKey="Data" />
-  <YAxis type="number" unit={'$'}/>
-  <CartesianGrid strokeDasharray="3 3" vertical={false} horizontal={false}/>
-  <Tooltip />
-  <Area type="monotone" dataKey="Total" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" dot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 2,r:2}} activeDot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 5,r:10}}/>
-  </AreaChart>
+    <AreaChart width={1000} height={350} data={graphData}
+    margin={{ top: 6, right: 30, left: 12, bottom: 0 }}>
+    <defs>
+      <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
+        <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+      </linearGradient>
+      <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8}/>
+        <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
+      </linearGradient>
+    </defs>
+    <XAxis dataKey="Data" />
+    <YAxis type="number" unit={'$'}/>
+    <CartesianGrid strokeDasharray="3 3" vertical={false} horizontal={false}/>
+    <Tooltip />
+    <Area type="monotone" dataKey="Total" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" dot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 2,r:2}} activeDot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 5,r:10}}/>
+    </AreaChart>
   </div>
 
 </div>

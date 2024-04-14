@@ -39,9 +39,7 @@ const PieChartGraph = ({
             { name: "East", value: (data as { east: number }).east },
             { name: "West", value: (data as { west: number }).west }
         ])
-        console.log(data)
     }, [data])
-    console.log(data)
   return (
     <div>
         <PieChart width={200} height={400}>
