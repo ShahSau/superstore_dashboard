@@ -1,5 +1,5 @@
 import { X } from 'lucide-react';
-import React, {useState} from 'react'
+
 
 const Filters = ({ columnFilters, setColumnFilters, filter, data,filter_name }: { columnFilters: any[], setColumnFilters: any, filter: string, data:any[],filter_name:string }) => {
 
@@ -20,12 +20,12 @@ const Filters = ({ columnFilters, setColumnFilters, filter, data,filter_name }: 
         <div>
             <div className="p-10 bg-gray-100 z-0">
                 <div className="max-w-md mx-auto">
-                    <label htmlFor="select" className="font-semibold block py-2">{filter_name}:</label>
+                    <label htmlFor="select" className="font-semibold block py-2">{filter_name}</label>
 
                     <div className="relative">
                         <div className=" bg-white flex border border-gray-200 rounded items-center">
                             <input
-                                name="select" id="select" className="px-4 appearance-none outline-none text-gray-800 w-full z-0" checked 
+                                name="select" id="select" className="px-4 appearance-none outline-none text-gray-800 w-full z-0" 
                                 value={taskName}
                                 onChange={(e) => onFilterChange(filter, e.target.value)}
                                 placeholder='Search ...'
@@ -54,7 +54,7 @@ const Filters = ({ columnFilters, setColumnFilters, filter, data,filter_name }: 
                             </label>
                         </div>
 
-                        <input type="checkbox" name="show_more" id="show_more" className="hidden peer" checked />
+                        <input type="checkbox" name="show_more" id="show_more" className="hidden peer"  />
 
                     </div>
                 </div>

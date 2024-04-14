@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import { useState} from 'react'
 import {
   GroupingState,
   flexRender,
@@ -12,171 +12,19 @@ import {
 
 } from "@tanstack/react-table";
 import Data from '../libs/data';
-import { Box, Button, ButtonGroup, HStack, Icon,  Input,  InputGroup,  InputLeftElement,  Text, } from "@chakra-ui/react";
-import EditableCell from './EditableCell';
+import { Box, Button, ButtonGroup, Icon,  Text, } from "@chakra-ui/react";
+// import EditableCell from './EditableCell';
+import columns from '../libs/columns';
 import Filters from './Filters';
 import SortIcon from './icons/SortIcon';
-import { ArrowRight, Search, Ungroup } from 'lucide-react';
+import { ArrowRight, Ungroup } from 'lucide-react';
 import GlobalFilter from './GlobalFilter';
+import Form from './Form';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
+import RegionFilters from './RegionFilter';
 
-
-const columns = [
-   {
-     accessorKey: "Row_ID",
-     header: "Id",
-     size: 225,
-    //  cell: EditableCell,
-    //  enableColumnFilter: true,
-    //  filterFn: "includesString",
-   },
-   {
-    accessorKey: "Product_Name",
-    header: "Product Name",
-    size: 225,
-    cell: EditableCell,
-    enableColumnFilter: true,
-    filterFn: "includesString",
-  },
-  {
-    accessorKey: "State",
-    header: "State",
-    size: 225,
-    cell: EditableCell,
-    enableColumnFilter: true,
-    filterFn: "includesString",
-  },
-  {
-    accessorKey: "Profit",
-    header: "Profit",
-    size: 225,
-    cell: EditableCell,
-    enableColumnFilter: true,
-     //filterFn: "includesString",
-  },
-  {
-    accessorKey: "Product_ID",
-    header: "Product ID",
-    size: 225,
-    cell: EditableCell,
-    enableColumnFilter: true,
-    filterFn: "includesString",
-  },
-   {
-    accessorKey: "Order_ID",
-    header: "Order Id",
-    size: 225,
-    cell: EditableCell,
-    enableColumnFilter: true,
-    filterFn: "includesString",
-  },
-  {
-    accessorKey: "Order_Date",
-    header: "Order Date",
-    size: 225,
-    cell: EditableCell,
-    enableColumnFilter: true,
-    // filterFn: "includesString",
-  },
-  {
-    accessorKey: "Ship_Date",
-    header: "Ship Date",
-    size: 225,
-    cell: EditableCell,
-    enableColumnFilter: true,
-    // filterFn: "includesString",
-  },
-  {
-    accessorKey: "Ship_Mode",
-    header: "Ship Mode",
-    size: 225,
-    cell: EditableCell,
-    enableColumnFilter: true,
-    // filterFn: "includesString",
-  },
-  {
-    accessorKey: "Customer_ID",
-    header: "Customer ID",
-    size: 225,
-    cell: EditableCell,
-    enableColumnFilter: true,
-    // filterFn: "includesString",
-  },
-  {
-    accessorKey: "Customer_Name",
-    header: "Customer Name",
-    size: 225,
-    cell: EditableCell,
-    enableColumnFilter: true,
-    // filterFn: "includesString",
-  },
-  {
-    accessorKey: "Segment",
-    header: "Segment",
-    size: 225,
-    cell: EditableCell,
-    enableColumnFilter: true,
-    // filterFn: "includesString",
-  },
-  {
-    accessorKey: "City",
-    header: "City",
-    size: 225,
-    cell: EditableCell,
-    enableColumnFilter: true,
-    // filterFn: "includesString",
-  },
-  
-  {
-    accessorKey: "Region",
-    header: "Region",
-    size: 225,
-    cell: EditableCell,
-    enableColumnFilter: true,
-    // filterFn: "includesString",
-  },
-  {
-    accessorKey: "Category",
-    header: "Category",
-    size: 225,
-    cell: EditableCell,
-    enableColumnFilter: true,
-    // filterFn: "includesString",
-  },
-  {
-    accessorKey: "Sub-Category",
-    header: "Sub-Category",
-    size: 225,
-    cell: EditableCell,
-    enableColumnFilter: true,
-    // filterFn: "includesString",
-  },
-  {
-    accessorKey: "Sales",
-    header: "Sales",
-    size: 225,
-    cell: EditableCell,
-    enableColumnFilter: true,
-    // filterFn: "includesString",
-  },
-  {
-    accessorKey: "Quantity",
-    header: "Quantity",
-    size: 225,
-    cell: EditableCell,
-    enableColumnFilter: true,
-    // filterFn: "includesString",
-  },
-  {
-    accessorKey: "Discount",
-    header: "Discount",
-    size: 225,
-    cell: EditableCell,
-    enableColumnFilter: true,
-    // filterFn: "includesString",
-  },
-  
-];
 
 const DataTable = () => {
   const [data, setData] = useState(Data);
@@ -184,6 +32,29 @@ const DataTable = () => {
   const [dropdown, setDropdown] = useState(false);
   const [grouping, setGrouping] = useState([]);
   const [globalFilter, setGlobalFilter] = useState('')
+  const [openform, setOpenform] = useState(false);
+
+  const [columnVisibility, setColumnVisibility] = useState({
+    "Row_ID": false,
+    "Product_Name": true,
+    "State": false,
+    "Profit": true,
+    "Product_ID": true,
+    "Order_ID": true,
+    "Order_Date": false,
+    "Ship_Date": false,
+    "Ship_Mode": false,
+    "Customer_ID": true,
+    "Customer_Name": true,
+    "Segment": false,
+    "City": true,
+    "Region": false,
+    "Category": false,
+    "Sub-Category": false,
+    "Sales": true,
+    "Quantity": false,
+    "Discount": false,
+  });
 
 
   const table = useReactTable({
@@ -193,6 +64,7 @@ const DataTable = () => {
       columnFilters,
       grouping,
       globalFilter,
+      columnVisibility,
     },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -205,56 +77,80 @@ const DataTable = () => {
     getGroupedRowModel: getGroupedRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
     onGlobalFilterChange: setGlobalFilter,
-    // globalFilterFn: (row, filterValue) => {
-    //   if (!filterValue) {
-    //     return true;
-    //   }
-    //   return Object.values(row.original).some((value) => {
-    //     if (typeof value === "string") {
-    //       return value.toLowerCase().includes(filterValue.toLowerCase());
-    //     }
-    //     return value === filterValue;
-    //   });
-    // }
+    onColumnVisibilityChange: setColumnVisibility,
 
     
   });
   const productsNameAll = table.getCoreRowModel().flatRows.map(row => row.getValue("Product_Name"))
   const productsIdAll = table.getCoreRowModel().flatRows.map(row => row.getValue("Product_ID"))
   const ordersIdAll = table.getCoreRowModel().flatRows.map(row => row.getValue("Order_ID"))
+  const statesAll = table.getCoreRowModel().flatRows.map(row => row.getValue("State"))
+
+  const newStatesAll = [... new Set(statesAll)]
+  const cityInit:any = newStatesAll.reduce((acc:object,cur: any)=>({...acc, [cur]:[]}),{})
+  
+  data.map((row:any) => {
+    if(row.State in cityInit){
+      cityInit[row.State] = [...new Set([...cityInit[row.State], row.City])]
+    }
+  }
+  )
+
+  
   
 
-  const addData = () => {
-    const data2 = table.getCoreRowModel().flatRows.map(row => row.getValue("Order_ID"))
-    if(!data2.includes("CA-2024-119914")){
-      console.log("true")
-      setData([...data,{
-        Row_ID: "9995",
-    Order_ID: "CA-2024-119914",
-    Order_Date: "04-05-2017",
-    Ship_Date: "09-05-2017",
-    Ship_Mode: "Second Class",
-    Customer_ID: "CC-12220",
-    Customer_Name: "Chris Cortes",
-    Segment: "Consumer",
-    Country: "United States",
-    City: "Westminster",
-    State: "California",
-    Postal_Code: "92683",
-    Region: "West",
-    Product_ID: "OFF-AP-10002684",
-    Category: "Office Supplies",
-    Sub_Category: "Appliances",
-    Product_Name: "xxxxxx",
-    Sales: "243.16",
-    Quantity: "2",
-    Discount: "0",
-    Profit: "72.948"
+  const addData = (newData: { order: string; name: string; sales: number; region: string; profit: number; }) => {
+    setOpenform(false)
+    const ordersIds = table.getCoreRowModel().flatRows.map(row => row.getValue("Order_ID"))
+    const rowIds = table.getCoreRowModel().flatRows.map(row => row.getValue("Row_ID"))
+    if(!ordersIds.includes(newData.order)){
+      setData([...data, {
+        Row_ID: String(rowIds.length + 1),
+        Order_ID: newData.order,
+        Product_Name: newData.name,
+        Sales: String(newData.sales),
+        Region: newData.region,
+        Profit: String(newData.profit),
+        Order_Date: '',
+        Ship_Date: '',
+        Ship_Mode: '',
+        Customer_ID: '',
+        Customer_Name: '',
+        Segment: '',
+        Country: '',
+        City: '',
+        State: '',
+        Postal_Code: '',
+        Product_ID: '',
+        Category: '',
+        'Sub-Category': '',
+        Quantity: '',
+        Discount: ''
       }])
+      toast.success(`${newData.name} with id ${newData.order} is added to the table`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
     }
-    else{
-      console.log("false")
+    else {
+      toast.error(`Id ${newData.order} already exists in the table!`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
     }
+
   }
 
   return (
@@ -274,7 +170,7 @@ const DataTable = () => {
           
         </div>
         <div className="w-full flex items-center gap-1">
-        <Filters columnFilters={columnFilters} setColumnFilters={setColumnFilters} data={productsNameAll} filter="Region" filter_name="Region"/>
+        <RegionFilters columnFilters={columnFilters} setColumnFilters={setColumnFilters} outerData={newStatesAll} innerData={cityInit} />
           
         </div>
       </div>
@@ -330,6 +226,22 @@ const DataTable = () => {
         setFilter={setGlobalFilter}
       />
     </div>
+    <div>
+      <button 
+        onClick={() => setOpenform(true)}
+        className="text-white mb-4 bg-[#8884d8] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center" type="button"
+      >
+        Add Data
+      </button>
+      <div  className={`${!openform ? 'hidden': '' } overflow-y-auto overflow-x-hidden fixed bottom-12 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full`}>
+        <div className="relative mt-24 mx-96 p-4 w-full max-w-2xl max-h-full flex justify-center items-center ">
+          <div className="relative bg-gray-200 rounded-lg shadow transition ease-in-out "> 
+            <Form addEvent={addData}/>
+          </div>
+        </div>
+      
+      </div>
+    </div>
     </div>
       <Box className="border-solid border-2 border-[#8884d8]" w={table.getTotalSize()}>
         {table.getHeaderGroups().map((headerGroup) => (
@@ -384,7 +296,6 @@ const DataTable = () => {
                       const value = e.target.value;
                       const profit = Number(value);
                       if (profit) {
-                        console.log(data);
                         const filteredData = data.filter(d => Number(d.Profit) >= profit);
                         setData(filteredData);
                       } else {
@@ -470,7 +381,7 @@ const DataTable = () => {
           isDisabled={!table.getCanPreviousPage()}
           className={`mr-4 cursor-pointer ${!table.getCanPreviousPage() ? 'opacity-60 disabled' : ''}`}
         >
-          firstpage
+          First page
         </Button>
         <Button
           onClick={() => table.previousPage()}
@@ -481,9 +392,22 @@ const DataTable = () => {
           Previous
         </Button>
         <Text mb={0} mr={12} ml={12}>
-        Page {table.getState().pagination.pageIndex + 1}{" "}
+          jump to page {" "} <input 
+            type='number'
+            value={table.getState().pagination.pageIndex + 1}
+            min={1}
+            onChange={(e) => {
+              const value = e.target.value;
+              const page = Number(value);
+              if (page) {
+                table.setPageIndex(page-1);
+              }
+            }}
+            className='w-12 border-2 border-gray-300 rounded-md'
+          />{" "}
+        (Page {table.getState().pagination.pageIndex + 1}{" "}
          of{" "}
-        {table.getPageCount()}
+        {table.getPageCount()})
       </Text>
         <Button
           onClick={() => table.nextPage()}
@@ -499,12 +423,24 @@ const DataTable = () => {
           isDisabled={!table.getCanNextPage()}
           className={`mr-4 cursor-pointer ${!table.getCanNextPage() ? 'opacity-60' : ''}`}
         >
-          lastpage
+          Last page
         </Button>
       </ButtonGroup>
       </Box>
     </Box>
-
+    <ToastContainer
+      position="top-center"
+      autoClose={5000}
+      limit={1}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="colored"
+    />
     </>
   )
 }
