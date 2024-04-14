@@ -16,7 +16,7 @@ import initialGraphData from '../libs/graphData'
 const Recharts = ({
   sendDataToParent
 }: {
-  sendDataToParent: (data: unknown) => void
+  sendDataToParent: (data: any) => void
 }) => {
   const [year, setYear] = useState('2017')
   const [grandTotal, setGrandTotal] = useState(0)
@@ -25,9 +25,9 @@ const Recharts = ({
   const [graphData] = useState(initialGraphData)
 
   const stats = [
-    { id: 1, name: 'Total Sales', stat: grandTotal.toFixed(3), icon: DollarSign },
+    { id: 1, name: 'Total Sales', stat:Math.trunc(grandTotal), icon: DollarSign },
     { id: 2, name: 'Items sold', stat: itemsSold, icon: PanelTop },
-    { id: 3, name: 'Overall Profit', stat: profit.toFixed(2), icon: Activity },
+    { id: 3, name: 'Overall Profit', stat: Math.trunc(profit), icon: Activity },
   ]
   useEffect(() => {
     graphData.map((item)=>{
@@ -160,8 +160,9 @@ const Recharts = ({
   <div className="flex items-center justify-center mt-4">
     <h2 className='text-2xl '>Accumulated sales</h2>
   </div>
+  <div className="flex items-center justify-center bg-gray-50">
   <AreaChart width={1000} height={350} data={graphData}
-  margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
+  margin={{ top: 6, right: 30, left: 12, bottom: 0 }}>
   <defs>
     <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
       <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
@@ -178,6 +179,7 @@ const Recharts = ({
   <Tooltip />
   <Area type="monotone" dataKey="Total" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" dot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 2,r:2}} activeDot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 5,r:10}}/>
   </AreaChart>
+  </div>
 
 </div>
 )}

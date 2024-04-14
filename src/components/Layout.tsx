@@ -32,8 +32,8 @@ const DashboardLayout = ({
         },
     ]
     return(
-    <div className="h-full relative">
-        <div className="hidden h-full md:flex md:w-72 md:flex-col md:fixed md:inset-y-0 bg-gray-900">
+    <div className="h-full relative ">
+        <div className="hidden h-full md:flex md:w-72 md:flex-col md:fixed md:inset-y-0 bg-gray-900 z-40">
         <div className="px-3 py-1 flex-1">
                 <Link to="/dashboard" className="flex items-center pl-3 mb-14">
                     <h1 className={"text-lg font-bold text-white mt-6"}>Dashboard</h1>

@@ -25,7 +25,7 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 
 const PieChartGraph = ({
     data
-}: { data: unknown }) => {
+}: { data: any }) => {
     const [initialData, setInitialData] = useState([
         { name: "South", value: 0 },
         { name: "Central", value: 0 },
@@ -55,7 +55,7 @@ const PieChartGraph = ({
             fill="#8884d8"
             dataKey="value"
         >
-            {initialData.map((item, index) => (
+            {initialData.map((_item, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
         </Pie>
