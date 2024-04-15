@@ -1,4 +1,4 @@
-import EditableCell from "../components/EditableCell";
+import EditableCell from "../components/Table/EditableCell";
 
 const columns = [
     {

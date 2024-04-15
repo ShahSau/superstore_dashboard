@@ -14,7 +14,7 @@ const Graphs = () => {
             <h1 className="text-2xl font-bold">Graph 1</h1>
             </div>
           {/* right side */}
-          <div className="col-span-1 mt-12">
+          <div className="col-span-1 mt-2">
             <h1 className="text-2xl font-bold">Bubble chart</h1>
             <BubbleChart />
           </div>

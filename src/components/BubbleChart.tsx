@@ -9,29 +9,35 @@ import styles from "./scatterplot.module.css";
 
 const MARGIN = { top: 60, right: 60, bottom: 60, left: 60 };
 
-// type DataPoint = {
-//   x: number;
-//   y: number;
-//   size: number;
-//   group: string;
-//   subGroup: string;
-// };
-
-// type ScatterplotProps = {
-//   width: number;
-//   height: number;
-//   data: any[];
-// };
-
 const BubbleChart = () => {
-    const [yaxis, setYaxis] = useState<any>("Discount");
-    const [xaxis, setXaxis] = useState<any>("Quantity");
-    const [size, setSize] = useState<any>("Profit");
-    const [group, setGroup] = useState<any>("Category");
+    const [filter] = useState<string[]>([
+      // "DaysToShip",
+      "Discount",
+      "Profit",
+      "Quantity",
+      // "ProfitRatio",
+      "Sales",
+      // "Returns"
+    ]);
+    const [breakdown] = useState<string[]>([
+      "Segment",
+      "Category",
+      "Ship_Mode",
+      "Customer_Name",
+      "Sub-Category",
+      "Product_Name",
+    ]);
+    const [yaxis, setYaxis] = useState<any>(filter[3]);
+    const [xaxis, setXaxis] = useState<any>(filter[1]);
+    const [group, setGroup] = useState<any>(breakdown[1]);
+    
+    
+    // size can be another filter
+
 
     const data = Data;
     const boundsWidth = 700 - MARGIN.right - MARGIN.left;
-    const boundsHeight = 1200 - MARGIN.top - MARGIN.bottom;
+    const boundsHeight = 700 - MARGIN.top - MARGIN.bottom;
   
     const [hovered, setHovered] = useState<InteractionData | null>(null);
 
@@ -55,7 +61,6 @@ const BubbleChart = () => {
     .domain([... new Set(allGroups)])
     .range(["#e0ac2b", "#e85252", "#6689c6", "#9a6fb0", "#a53253"]);
 
-
 // Build the shapes
 const allShapes = data.map((d:any, i) => {
     return (
@@ -71,7 +76,7 @@ const allShapes = data.map((d:any, i) => {
           setHovered({
             xPos: xScale(Number(d[xaxis])),
             yPos: yScale(Number(d[yaxis])),
-            name: d.Category, // can put anything in here
+            name: d[group], // can put anything in here
           })
         }
         onMouseLeave={() => setHovered(null)}
@@ -81,63 +86,69 @@ const allShapes = data.map((d:any, i) => {
 
   return(
     <>
+    <div className="mb-16 m-4 flex flex-row">
     <div className="float-right mr-6">
-        <label htmlFor="location" className="block text-lg font-medium text-gray-700">
-            X Axis
-        </label>
+          <label htmlFor="location" className="block text-lg font-medium text-gray-700 ">
+              Y Axis
+          </label>
           <select
-            id="location"
-            name="location"
-            className="text-lg block cursor-pointer bg-[#8884d8] rounded-md border-l border-gray-200 py-2 pl-4 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 sm:text-sm sm:leading-6"
-            defaultValue="2017"
-            onChange={(e) =>{} }
+              id="yaxis"
+              name="yaxis"
+              value={yaxis}
+              defaultValue={yaxis}
+              className="mt-1 block w-full border-red-300  pl-3 pr-10 py-2 text-base  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+              onChange={(e) => setYaxis(e.target.value)}
           >
-            <option>2017</option>
-            <option>2016</option>
-            <option>2015</option>
+              {filter.map((f) => {
+                if (f !== xaxis) return <option key={f}>{f}</option>
+              })}
           </select>
+      </div>
+      <div className="float-right mr-6">
+          <label htmlFor="location" className="block text-lg font-medium text-gray-700 ">
+              X Axis
+          </label>
+          <select
+              id="xaxis"
+              name="xaxis"
+              value={xaxis}
+              defaultValue={xaxis}
+              className="mt-1 block w-full border-red-300  pl-3 pr-10 py-2 text-base  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+              onChange={(e) => setXaxis(e.target.value)}
+          >
+              {filter.map((f) => {
+                if (f !== yaxis) return <option key={f}>{f}</option>
+              })}
+          </select>
+      </div>
+      <div className="float-right mr-6">
+          <label htmlFor="location" className="block text-lg font-medium text-gray-700 ">
+              Breakdown
+          </label>
+          <select
+              id="group"
+              name="group"
+              value={group}
+              defaultValue={group}
+              className="mt-1 block w-full border-red-300  pl-3 pr-10 py-2 text-base  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+              onChange={(e) => setGroup(e.target.value)}
+          >
+              {breakdown.map((f) => {
+                return <option key={f}>{f}</option>
+              })}
+          </select>
+      </div>
     </div>
-    <div className="float-right mr-6">
-        <label htmlFor="location" className="block text-lg font-medium text-gray-700">
-            Y Axis
-        </label>
-          <select
-            id="location"
-            name="location"
-            className="text-lg block cursor-pointer bg-[#8884d8] rounded-md border-l border-gray-200 py-2 pl-4 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 sm:text-sm sm:leading-6"
-            defaultValue="2017"
-            onChange={(e) => {}}
-          >
-            <option>2017</option>
-            <option>2016</option>
-            <option>2015</option>
-          </select>
-        </div>
-        <div className="float-right mr-6">
-        <label htmlFor="location" className="block text-lg font-medium text-gray-700">
-            Breakdown
-        </label>
-          <select
-            id="location"
-            name="location"
-            className="text-lg block cursor-pointer bg-[#8884d8] rounded-md border-l border-gray-200 py-2 pl-4 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 sm:text-sm sm:leading-6"
-            defaultValue="2017"
-            onChange={(e) => {}}
-          >
-            <option>2017</option>
-            <option>2016</option>
-            <option>2015</option>
-          </select>
-        </div>
+        
     <div style={{ position: "relative" }}>
-      <svg width={700} height={1200}>
+      <svg width={700} height={700}>
         <g
           width={boundsWidth}
           height={boundsHeight}
           transform={`translate(${[MARGIN.left, MARGIN.top].join(",")})`}
         >
           {/* Y axis */}
-          <AxisLeft yScale={yScale} pixelsPerTick={40} width={boundsWidth} />
+          <AxisLeft yScale={yScale} pixelsPerTick={40} width={boundsWidth} axisLabel={yaxis}/>
 
           {/* X axis, use an additional translation to appear at the bottom */}
           <g transform={`translate(0, ${boundsHeight})`}>
@@ -145,6 +156,7 @@ const allShapes = data.map((d:any, i) => {
               xScale={xScale}
               pixelsPerTick={40}
               height={boundsHeight}
+              axisLabel={xaxis}
             />
           </g>
 

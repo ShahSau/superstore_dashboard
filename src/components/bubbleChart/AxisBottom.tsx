@@ -5,6 +5,7 @@ type AxisBottomProps = {
   xScale: ScaleLinear<number, number>;
   pixelsPerTick: number;
   height: number;
+  axisLabel: string;
 };
 
 // tick length
@@ -14,6 +15,7 @@ export const AxisBottom = ({
   xScale,
   pixelsPerTick,
   height,
+  axisLabel,
 }: AxisBottomProps) => {
   const range = xScale.range();
 
@@ -52,6 +54,17 @@ export const AxisBottom = ({
           </text>
         </g>
       ))}
+      <text
+        x={height / 2}
+        y={50}
+        style={{
+          fontSize: "25px",
+          textAnchor: "middle",
+          fill: "#454545",
+        }}
+      >
+        {axisLabel}
+      </text>
     </>
   );
 };

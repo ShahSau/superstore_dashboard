@@ -5,11 +5,12 @@ type AxisLeftProps = {
   yScale: ScaleLinear<number, number>;
   pixelsPerTick: number;
   width: number;
+  axisLabel: string;
 };
 
 const TICK_LENGTH = 10;
 
-export const AxisLeft = ({ yScale, pixelsPerTick, width }: AxisLeftProps) => {
+export const AxisLeft = ({ yScale, pixelsPerTick, width,axisLabel  }: AxisLeftProps) => {
   const range = yScale.range();
 
   const ticks = useMemo(() => {
@@ -47,6 +48,18 @@ export const AxisLeft = ({ yScale, pixelsPerTick, width }: AxisLeftProps) => {
           </text>
         </g>
       ))}
+      <text
+        x={-300}
+        y={-40 }
+        style={{
+          fontSize: "25px",
+          textAnchor: "middle",
+          fill: "#454545",
+          transform: "rotate(-90deg)",
+        }}
+      >
+        {axisLabel}
+      </text>
     </>
   );
 };
