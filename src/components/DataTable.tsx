@@ -1,6 +1,5 @@
 import { useState} from 'react'
 import {
-  GroupingState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -15,15 +14,15 @@ import Data from '../libs/data';
 import { Box, Button, ButtonGroup, Icon,  Text, } from "@chakra-ui/react";
 // import EditableCell from './EditableCell';
 import columns from '../libs/columns';
-import Filters from './Filters';
+import Filters from './Table/Filters';
 import SortIcon from './icons/SortIcon';
 import { ArrowRight, Ungroup } from 'lucide-react';
-import GlobalFilter from './GlobalFilter';
-import Form from './Form';
+import GlobalFilter from './Table/GlobalFilter';
+import Form from './Table/Form';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
-import RegionFilters from './RegionFilter';
+import RegionFilters from './Table/RegionFilter';
 
 
 const DataTable = () => {
@@ -220,13 +219,15 @@ const DataTable = () => {
       </div>
       </div>
       <div className='mr-24 flex border-4 border-[#8884d8]'>
+        
       {/* Global filter*/}
       <GlobalFilter
         filter={globalFilter}
         setFilter={setGlobalFilter}
       />
     </div>
-    <div>
+    {/*form popup */}
+    {/* <div>
       <button 
         onClick={() => setOpenform(true)}
         className="text-white mb-4 bg-[#8884d8] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center" type="button"
@@ -241,7 +242,7 @@ const DataTable = () => {
         </div>
       
       </div>
-    </div>
+    </div> */}
     </div>
       <Box className="border-solid border-2 border-[#8884d8]" w={table.getTotalSize()}>
         {table.getHeaderGroups().map((headerGroup) => (
@@ -374,7 +375,7 @@ const DataTable = () => {
         }
       </Box>
       <br />
-      <Box ml={96} mb={12} className='fixed -bottom-2 right-96 z-0'>
+      <Box ml={96} mb={12} className=' bottom-0 right-96 z-0'> {/* if Form is popup fixed -bottom-2 right-96 z-0 */}
       <ButtonGroup size="sm" isAttached variant="outline">
       <Button 
           onClick={() => table.setPageIndex(0)}
@@ -428,6 +429,10 @@ const DataTable = () => {
       </ButtonGroup>
       </Box>
     </Box>
+    <div className="relative bg-gray-200 rounded-lg shadow transition ease-in-out pb-12"> 
+    <h2 className='flex justify-center pt-12 text-lg'>Add data to the table</h2>
+            <Form addEvent={addData}/>
+    </div>
     <ToastContainer
       position="top-center"
       autoClose={5000}

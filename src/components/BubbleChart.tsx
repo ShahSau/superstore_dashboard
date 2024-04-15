@@ -1,21 +1,21 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import {  useState } from "react";
 import * as d3 from "d3";
-import Data from "../libs/data";
+// import Data from "../libs/data";
 import { AxisLeft } from "./bubbleChart/AxisLeft";
 import { AxisBottom } from "./bubbleChart/AxisBottom";
 import { Tooltip, InteractionData } from "./bubbleChart/Tooltip";
-import styles from "./scatterplot.module.css";
+// import styles from "./scatterplot.module.css";
 
 
 const MARGIN = { top: 60, right: 60, bottom: 60, left: 60 };
 
-const BubbleChart = () => {
+const BubbleChart = ({Data}: {Data: any[]}) => {
     const [filter] = useState<string[]>([
-      // "DaysToShip",
+      "DaysToShip",
       "Discount",
       "Profit",
       "Quantity",
-      // "ProfitRatio",
+      "ProfitRatio",
       "Sales",
       // "Returns"
     ]);
@@ -30,12 +30,11 @@ const BubbleChart = () => {
     const [yaxis, setYaxis] = useState<any>(filter[3]);
     const [xaxis, setXaxis] = useState<any>(filter[1]);
     const [group, setGroup] = useState<any>(breakdown[1]);
-    
-    
     // size can be another filter
 
 
     const data = Data;
+    console.log(data)
     const boundsWidth = 700 - MARGIN.right - MARGIN.left;
     const boundsHeight = 700 - MARGIN.top - MARGIN.bottom;
   
@@ -46,14 +45,14 @@ const BubbleChart = () => {
         number,
         number
       ];
-  const yScale = d3.scaleLinear().domain([minY, maxY]).range([boundsHeight, 0]).nice();
-  const [, maxX] = d3.extent(data.map((d:any) => Number(d[xaxis]))) as [
+  const yScale = d3.scaleLinear().domain([minY, maxY*1.05]).range([boundsHeight, 0]).nice();
+  const [minX, maxX] = d3.extent(data.map((d:any) => Number(d[xaxis]))) as [
     number,
     number
   ];
   const xScale = d3
     .scaleLinear()
-    .domain([0, maxX])
+    .domain([minX, maxX])
     .range([0, boundsWidth]).nice();
   const allGroups = data.map((d:any) => String(d[group]));
   const colorScale = d3
@@ -76,7 +75,7 @@ const allShapes = data.map((d:any, i) => {
           setHovered({
             xPos: xScale(Number(d[xaxis])),
             yPos: yScale(Number(d[yaxis])),
-            name: d[group], // can put anything in here
+            name: `${group}:${d[group]}, ${xaxis}:${d[xaxis]}, ${yaxis}: ${d[yaxis]}`, // can put anything in here
           })
         }
         onMouseLeave={() => setHovered(null)}

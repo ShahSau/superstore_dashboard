@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import Table from './pages/Table'
 import Graphs from './pages/Graphs'
 import Dashboard from './pages/Dashboard'
+import ExcelToJsonConverter from './pages/DataConvert'
 
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/table" element={<Table />} />
         <Route path="/graph" element={<Graphs />} />
+        <Route path="/dataconvert" element={<ExcelToJsonConverter />} />
       </Routes>
     </BrowserRouter>
   )

@@ -39,7 +39,7 @@ const Recharts = ({
     Data.map((item) => {
       if (item.Order_Date.split("-")[2] == year) { //here
         const month = item.Order_Date.split("-")[1]; //here
-        graphData[Number(month) - 1].Total = graphData[Number(month) - 1].Total + Number(item.Sales);
+        graphData[Number(month) - 1].Total = graphData[Number(month) - 1].Total + parseInt(Number(item.Sales).toFixed(2));
         graphData[Number(month) - 1].Profit = graphData[Number(month) - 1].Profit + Number(item.Profit);
         graphData[Number(month) - 1].itemsSold = graphData[Number(month) - 1].itemsSold + Number(item.Quantity);
         graphData[Number(month) - 1].region?.map((region) => { 
@@ -57,6 +57,7 @@ const Recharts = ({
     setProfit(graphData.reduce((acc, item) => acc + item.Profit, 0));
     setItemsSold(graphData.reduce((acc, item) => acc + item.itemsSold, 0));
     setGrandTotal(graphData.reduce((acc, item) => acc + item.Total, 0))
+    
     const regionData ={
       south: 0,
       central: 0,
