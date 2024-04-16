@@ -82,9 +82,11 @@ const DataTable = () => {
   const productsIdAll = table.getCoreRowModel().flatRows.map(row => row.getValue("Product_ID"))
   const ordersIdAll = table.getCoreRowModel().flatRows.map(row => row.getValue("Order_ID"))
   const statesAll = table.getCoreRowModel().flatRows.map(row => row.getValue("State"))
+  const cityAll = table.getCoreRowModel().flatRows.map(row => row.getValue("City"))
 
-  {/*statesAll contains state names multiple time, so using set to have only unique values*/}
+  {/*statesAll, cityAll contains state, city names multiple time, so using set to have only unique values*/}
   const newStatesAll = [... new Set(statesAll)]
+  const newCityAll = [... new Set(cityAll)]
 
   {/* creating an object that has state and empty array */}
   const cityInit:any = newStatesAll.reduce((acc:object,cur: any)=>({...acc, [cur]:[]}),{})
@@ -94,8 +96,7 @@ const DataTable = () => {
     if(row.State in cityInit){
       cityInit[row.State] = [...new Set([...cityInit[row.State], row.City])]
     }
-  }
-  )
+  })
 
 
   const addData = (newData: { order: string; name: string; sales: number; region: string; profit: number; }) => {
@@ -174,7 +175,7 @@ const DataTable = () => {
           
         </div>
         <div className="w-full flex items-center gap-1">
-        <RegionFilters columnFilters={columnFilters} setColumnFilters={setColumnFilters} outerData={newStatesAll} innerData={cityInit} />
+        <RegionFilters columnFilters={columnFilters} setColumnFilters={setColumnFilters} outerData={newStatesAll} innerData={newCityAll} filterData={cityInit}/>
           
         </div>
       </div>
