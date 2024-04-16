@@ -27,7 +27,7 @@ const Graphs = () => {
   return (
     <div>
       <DashboardLayout>
-        <h1 className="text-2xl font-bold mb-4">Graphs</h1>
+        <h1 className="text-2xl font-bold mb-4 ml-2">Graphs</h1>
         <div className="grid h-screen grid-cols-2">
           {/* left side */}
           <div className="col-span-1 bg-gray-100">
