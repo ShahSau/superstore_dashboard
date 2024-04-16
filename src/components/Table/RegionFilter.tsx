@@ -69,7 +69,10 @@ const filter = "State";
 
                             <button 
                                 className="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-gray-600"
-                                onClick={()=>removeFilter()}
+                                onClick={()=>{
+                                    removeFilter()
+                                    removeFilterCity()
+                                }}
                             >
                                 <X />
                             </button>

@@ -46,7 +46,6 @@ const Filters = ({ columnFilters, setColumnFilters, filter, data,filter_name }: 
                                         data.map((d, index) => (
                                             <>
                                             <option key={index} value={d}>{d}</option>
-                                            {/* <option key={index} value={d} onClick={()=>console.log(d)}>&ensp;&ensp;{d}</option> */}
                                             </>
                                         ))
                                     }

@@ -24,11 +24,23 @@ const Recharts = ({
   const [profit, setProfit] = useState(0)
   const [graphData] = useState(initialGraphData)
 
+  // get the year values from the data amd sort them
+  const yearVal: string[]= []
+  Data.map((item) => {
+    if (!yearVal.includes(item.Order_Date.split("-")[2])) {
+      yearVal.push(item.Order_Date.split("-")[2])
+    }
+  })
+  yearVal.sort((a, b) => Number(a) - Number(b))
+
+  // intialize the stats for the card 
   const stats = [
     { id: 1, name: 'Total Sales', stat:Math.trunc(grandTotal), icon: DollarSign },
     { id: 2, name: 'Items sold', stat: itemsSold, icon: PanelTop },
     { id: 3, name: 'Overall Profit', stat: Math.trunc(profit), icon: Activity },
   ]
+
+  // fitler the data based on the year and calculate the stats
   useEffect(() => {
     graphData.map((item)=>{
       item.Total = 0
@@ -85,6 +97,9 @@ const Recharts = ({
   }
   ,[year])
 
+  // title for the graph and the data key 
+  const title =[['Profit Ratio', 'Profit_ratio'] ,['Accumulated Sales', 'Total'] ]
+  
   return (
   <div className='overflow-hidden'>
     <div className="flow-root mb-4">
@@ -100,10 +115,11 @@ const Recharts = ({
             defaultValue="2017"
             onChange={(e) => setYear(e.target.value)}
           >
-            <option>2017</option>
-            <option>2016</option>
-            <option>2015</option>
-            <option>2014</option>
+            {yearVal.map((item) => (
+              <option key={item} value={item}>
+                {item}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -130,57 +146,35 @@ const Recharts = ({
       </dl>
     </div>
 
-
-{/* merge the follwoing two graphs into one code*/}
-{/* Profit Ratio*/}
-  <div className="flex items-center justify-center mt-2">
-    <h2 className='text-2xl '>Profit Ratio</h2>
-  </div>
-  <div className="flex items-center justify-center bg-gray-50">
-    <AreaChart width={1000} height={350} data={graphData}
-    margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
-    <defs>
-      <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
-        <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
-      </linearGradient>
-      <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8}/>
-        <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
-      </linearGradient>
-    </defs>
-    <XAxis dataKey="Data" />
-    <YAxis type="number"  unit={'%'}/>
-    <CartesianGrid strokeDasharray="3 3" vertical={false} horizontal={false}/>
-    <Tooltip />
-    <Area type="monotone" dataKey="Profit_ratio" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" dot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 2,r:2}} activeDot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 5,r:10}}/>
-    </AreaChart>
-  </div>
-
-
-  <div className="flex items-center justify-center mt-4">
-    <h2 className='text-2xl '>Accumulated sales</h2>
-  </div>
-  <div className="flex items-center justify-center bg-gray-50">
-    <AreaChart width={1000} height={350} data={graphData}
-    margin={{ top: 6, right: 30, left: 12, bottom: 0 }}>
-    <defs>
-      <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
-        <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
-      </linearGradient>
-      <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8}/>
-        <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
-      </linearGradient>
-    </defs>
-    <XAxis dataKey="Data" />
-    <YAxis type="number" unit={'$'}/>
-    <CartesianGrid strokeDasharray="3 3" vertical={false} horizontal={false}/>
-    <Tooltip />
-    <Area type="monotone" dataKey="Total" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" dot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 2,r:2}} activeDot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 5,r:10}}/>
-    </AreaChart>
-  </div>
+  {
+    title.map((item) => (
+      <>
+        <div className="flex items-center justify-center mt-4">
+          <h2 className='text-2xl '>{item[0]}</h2>
+        </div>
+        <div className="flex items-center justify-center bg-gray-50">
+          <AreaChart width={1000} height={350} data={graphData}
+          margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
+          <defs>
+            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
+              <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+            </linearGradient>
+            <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8}/>
+              <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
+            </linearGradient>
+          </defs>
+          <XAxis dataKey="Data" />
+          <YAxis type="number"  unit={item[1] != 'Total' ? "%" : "$"}/>
+          <CartesianGrid strokeDasharray="3 3" vertical={false} horizontal={false}/>
+          <Tooltip />
+          <Area type="monotone" dataKey={item[1]} stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" dot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 2,r:2}} activeDot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 5,r:10}}/>
+          </AreaChart>
+        </div>
+    </>
+    ))
+  }
 
 </div>
 )}

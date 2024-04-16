@@ -85,7 +85,7 @@ const allShapes = data.map((d:any, i) => {
   return(
     <>
     <div className="mb-16 m-4 flex flex-row">
-    <div className="float-right mr-6">
+      <div className="float-right mr-6">
           <label htmlFor="location" className="block text-lg font-medium text-gray-700 ">
               Y Axis
           </label>

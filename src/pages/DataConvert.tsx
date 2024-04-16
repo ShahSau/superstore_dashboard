@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import * as XLSX from "xlsx";
 
 function ExcelToJsonConverter() {
@@ -28,8 +28,6 @@ const handleConvert = () => {
             const worksheet = workbook.Sheets[sheetName];
             const json = XLSX.utils.sheet_to_json(worksheet, options);
             setJsonData(JSON.stringify(json, null, 2));
-            
-            console.log(json.length);
         };
         reader.readAsBinaryString(file);
     }
