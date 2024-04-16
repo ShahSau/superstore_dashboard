@@ -4,9 +4,11 @@ import BubbleChart from '../components/BubbleChart'
 import DashboardLayout from '../components/Layout'
 import Timeline from '../components/Timeline';
 import Data from "../libs/data";
+import returnData from '../libs/returnData';
 
 const Graphs = () => {
   const [selection, setSelection] = useState("year")
+  const returnItemIds = [...new Set(returnData.map((data: any) => data.Order_ID))]
   Data.map((data: any) => {
     {/* same month */}
     if(data.Order_Date.split("-")[1] === data.Ship_Date.split("-")[1]){
@@ -16,6 +18,7 @@ const Graphs = () => {
       {/* different month */}
       data["DaysToShip"] = Math.abs((30 - Number(data.Order_Date.split("-")[0])) + Number(data.Ship_Date.split("-")[0]))
     }
+    returnItemIds.includes(data.Order_ID)? data["Returned"] = "Yes" : data["Returned"] = "No"
 
     data["ProfitRatio"] = parseFloat((data.Profit/data.Sales).toFixed(3))
   }
@@ -28,7 +31,7 @@ const Graphs = () => {
         <div className="grid h-screen grid-cols-2">
           {/* left side */}
           <div className="col-span-1 bg-gray-100">
-            {/* <h1 className="text-2xl font-bold">Graph 1</h1> */}
+            
             <div className='flex items-center justify-center'>
             Select Granularity:
             <select

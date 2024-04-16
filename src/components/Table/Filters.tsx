@@ -41,7 +41,7 @@ const Filters = ({ columnFilters, setColumnFilters, filter, data,filter_name }: 
                                  className="w-1/12 flex items-end justify-end cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-gray-600"
                                  
                             >
-                                <select id="countries" onChange={(e)=>onFilterChange(filter, e.target.value)} className=" text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                <select id="filters" onChange={(e)=>onFilterChange(filter, e.target.value)} className=" text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                                     {
                                         data.map((d, index) => (
                                             <>

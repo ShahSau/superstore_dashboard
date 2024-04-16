@@ -28,7 +28,7 @@ const Timeline = ({Data, selection}: {Data: any[], selection:string}) => {
     const monthsString = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
 
     // graph name 
-    const values = ['Sales','Profit','Quantity','DaysToShip','Discount','ProfitRatio']
+    const values = ['Sales','Profit','Quantity','DaysToShip','Discount','ProfitRatio', 'Returns']
 
     useEffect(() => {
         const obj: {[key: string]: any} = {}
@@ -42,7 +42,7 @@ const Timeline = ({Data, selection}: {Data: any[], selection:string}) => {
                   DaysToShip: obj[data.Order_Date.split("-")[2]]?.DaysToShip ? obj[data.Order_Date.split("-")[2]]?.DaysToShip + Number(data.DaysToShip) : Number(data.DaysToShip),
                   Discount: obj[data.Order_Date.split("-")[2]]?.Discount ? obj[data.Order_Date.split("-")[2]]?.Discount + Number(data.Discount) : Number(data.Discount),
                   ProfitRatio: obj[data.Order_Date.split("-")[2]]?.ProfitRatio ? obj[data.Order_Date.split("-")[2]]?.ProfitRatio + Number(data.ProfitRatio) : Number(data.ProfitRatio),
-                  //Return: objyear[data.Order_Date.split("-")[2]]?.Return ? objyear[data.Order_Date.split("-")[2]]?.Return + Number(data.Return) : Number(data.Return),
+                  Returns: obj[data.Order_Date.split("-")[2]]?.Returns ? obj[data.Order_Date.split("-")[2]]?.Returns + (data.Returned === 'Yes' ? 1  : 0) : (data.Returned=== 'Yes' ? 1  : 0),
                   year: data.Order_Date.split("-")[2]
                 }
             }
@@ -54,7 +54,7 @@ const Timeline = ({Data, selection}: {Data: any[], selection:string}) => {
                     DaysToShip: obj[Math.ceil(Number(data.Order_Date.split("-")[1])/3)]?.DaysToShip ? obj[Math.ceil(Number(data.Order_Date.split("-")[1])/3)]?.DaysToShip + Number(data.DaysToShip) : Number(data.DaysToShip),
                     Discount: obj[Math.ceil(Number(data.Order_Date.split("-")[1])/3)]?.Discount ? obj[Math.ceil(Number(data.Order_Date.split("-")[1])/3)]?.Discount + Number(data.Discount) : Number(data.Discount),
                     ProfitRatio: obj[Math.ceil(Number(data.Order_Date.split("-")[1])/3)]?.ProfitRatio ? obj[Math.ceil(Number(data.Order_Date.split("-")[1])/3)]?.ProfitRatio + Number(data.ProfitRatio) : Number(data.ProfitRatio),
-                    // Return: objquarter[Math.ceil(Number(data.Order_Date.split("-")[1])/3)]?.Return ? objquarter[Math.ceil(Number(data.Order_Date.split("-")[1])/3)]?.Return + Number(data.Return) : Number(data.Return),
+                    Returns: obj[Math.ceil(Number(data.Order_Date.split("-")[1])/3)]?.Returns ? obj[Math.ceil(Number(data.Order_Date.split("-")[1])/3)]?.Returns + (data.Returned === 'Yes' ? 1  : 0) : (data.Returned=== 'Yes' ? 1  : 0),
                     quarter: Math.ceil(Number(data.Order_Date.split("-")[1])/3)
                 }
             }
@@ -66,7 +66,7 @@ const Timeline = ({Data, selection}: {Data: any[], selection:string}) => {
                     DaysToShip: obj[data.Order_Date.split("-")[1]]?.DaysToShip ? obj[data.Order_Date.split("-")[1]]?.DaysToShip + Number(data.DaysToShip) : Number(data.DaysToShip),
                     Discount: obj[data.Order_Date.split("-")[1]]?.Discount ? obj[data.Order_Date.split("-")[1]]?.Discount + Number(data.Discount) : Number(data.Discount),
                     ProfitRatio: obj[data.Order_Date.split("-")[1]]?.ProfitRatio ? obj[data.Order_Date.split("-")[1]]?.ProfitRatio + Number(data.ProfitRatio) : Number(data.ProfitRatio),
-                    //Return: objmonth[data.Order_Date.split("-")[1]]?.Return ? objmonth[data.Order_Date.split("-")[1]]?.Return + Number(data.Return) : Number(data.Return),
+                    Returns: obj[data.Order_Date.split("-")[1]]?.Returns ? obj[data.Order_Date.split("-")[1]]?.Returns + (data.Returned === 'Yes' ? 1  : 0) : (data.Returned=== 'Yes' ? 1  : 0),
                     month: monthsString[Number(data.Order_Date.split("-")[1]) - 1]
                 }
             }
@@ -78,15 +78,12 @@ const Timeline = ({Data, selection}: {Data: any[], selection:string}) => {
                     DaysToShip: obj[getWeek({dateold: data.Order_Date})]?.DaysToShip ? obj[getWeek({dateold: data.Order_Date})]?.DaysToShip + Number(data.DaysToShip) : Number(data.DaysToShip),
                     Discount: obj[getWeek({dateold: data.Order_Date})]?.Discount ? obj[getWeek({dateold: data.Order_Date})]?.Discount + Number(data.Discount) : Number(data.Discount),
                     ProfitRatio: obj[getWeek({dateold: data.Order_Date})]?.ProfitRatio ? obj[getWeek({dateold: data.Order_Date})]?.ProfitRatio + Number(data.ProfitRatio) : Number(data.ProfitRatio),
-                    // Return: objweek[getWeek({dateold: data.Order_Date})]?.Return ? objweek[getWeek({dateold: data.Order_Date})]?.Return + Number(data.Return) : Number(data.Return),
-                    //data: objweek[getWeek({dateold: data.Order_Date})]?.data ? objweek[getWeek({dateold: data.Order_Date})]?.data + 1 : 1,
+                    Returns: obj[getWeek({dateold: data.Order_Date})]?.Returns ? obj[getWeek({dateold: data.Order_Date})]?.Returns + (data.Returned === 'Yes' ? 1  : 0) : (data.Returned=== 'Yes' ? 1  : 0),
                     week: getWeek({dateold: data.Order_Date})
                 }
             }
         })
         setGraphData(obj)
-
-
     }, [selection])
     return (
     <div className="mt-2">

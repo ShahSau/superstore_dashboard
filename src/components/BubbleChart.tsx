@@ -15,7 +15,7 @@ const BubbleChart = ({Data}: {Data: object[]}) => {
       "Quantity",
       "ProfitRatio",
       "Sales",
-      // "Returns"
+      //"Returns"
     ]);
     const [breakdown] = useState<string[]>([
       "Segment",
@@ -24,6 +24,7 @@ const BubbleChart = ({Data}: {Data: object[]}) => {
       "Customer_Name",
       "Sub-Category",
       "Product_Name",
+      "Returned"
     ]);
     const [yaxis, setYaxis] = useState<string>(filter[2]);
     const [xaxis, setXaxis] = useState<string>(filter[3]);
