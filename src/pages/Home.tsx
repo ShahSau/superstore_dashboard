@@ -19,6 +19,7 @@ const Home = () => {
     west: 0
   })
 
+  {/*two way data bindings */}
   const handleDataFromChild = (data: {
     south: number,
     north: number,
