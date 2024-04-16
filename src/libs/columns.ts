@@ -2,11 +2,10 @@ import EditableCell from "../components/Table/EditableCell";
 
 const columns = [
     {
-      accessorKey: "Row_ID",
-      header: "Id",
-      size: 225,
+     accessorKey: "Row_ID",
+     header: "Id",
+     size: 225,
      cell: EditableCell,
-     visible: true,
     },
     {
      accessorKey: "Product_Name",

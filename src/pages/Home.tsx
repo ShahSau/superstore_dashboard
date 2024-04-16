@@ -33,9 +33,11 @@ const Home = () => {
     <div>
       <DashboardLayout>
         <div className="grid grid-cols-12 gap-2 ml-4 h-full">
+          {/* left side*/}
           <div className=' col-span-9 h-full mt-2'>
-            <Recharts sendDataToParent={(data: any) => handleDataFromChild(data as { south: number, north: number, east: number, west: number })} />
+            <Recharts sendDataToParent={(data: object) => handleDataFromChild(data as { south: number, north: number, east: number, west: number })} />
           </div>
+          {/* Right side*/}
           <div className=' col-span-3 mt-6 '>
             <Card />
             <div className='w-full bg-gray-100 mt-60 '>

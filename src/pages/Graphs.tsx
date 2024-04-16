@@ -8,10 +8,12 @@ import Data from "../libs/data";
 const Graphs = () => {
   const [selection, setSelection] = useState("year")
   Data.map((data: any) => {
+    {/* same month */}
     if(data.Order_Date.split("-")[1] === data.Ship_Date.split("-")[1]){
       data["DaysToShip"] = Math.abs(Number(data.Ship_Date.split("-")[0]) - Number(data.Order_Date.split("-")[0]))
     }
     else{
+      {/* different month */}
       data["DaysToShip"] = Math.abs((30 - Number(data.Order_Date.split("-")[0])) + Number(data.Ship_Date.split("-")[0]))
     }
 
@@ -28,6 +30,7 @@ const Graphs = () => {
           <div className="col-span-1 bg-gray-100">
             {/* <h1 className="text-2xl font-bold">Graph 1</h1> */}
             <div className='flex items-center justify-center'>
+            Select Granularity:
             <select
             id="selection"
             name="selection"
@@ -43,6 +46,7 @@ const Graphs = () => {
             </div>
             <Timeline Data={Data} selection={selection}/>
             </div>
+            
           {/* right side */}
           <div className="col-span-1 mt-2">
             <h1 className="text-2xl font-bold">Bubble chart</h1>

@@ -36,24 +36,26 @@ const Recharts = ({
   // intialize the stats for the card 
   const stats = [
     { id: 1, name: 'Total Sales', stat:Math.trunc(grandTotal), icon: DollarSign },
-    { id: 2, name: 'Items sold', stat: itemsSold, icon: PanelTop },
+    { id: 2, name: 'No of Items sold', stat: itemsSold, icon: PanelTop },
     { id: 3, name: 'Overall Profit', stat: Math.trunc(profit), icon: Activity },
   ]
 
   // fitler the data based on the year and calculate the stats
   useEffect(() => {
-    graphData.map((item)=>{
-      item.Total = 0
-      item.Profit = 0
-      item.itemsSold = 0
-      item.Profit_ratio = 0
-    })
+    // graphData.map((item)=>{
+    //   item.Total = 0
+    //   item.Profit = 0
+    //   item.itemsSold = 0
+    //   item.Profit_ratio = 0
+    // })
     Data.map((item) => {
-      if (item.Order_Date.split("-")[2] == year) { //here
-        const month = item.Order_Date.split("-")[1]; //here
+      if (item.Order_Date.split("-")[2] == year) { 
+        const month = item.Order_Date.split("-")[1]; 
         graphData[Number(month) - 1].Total = graphData[Number(month) - 1].Total + parseInt(Number(item.Sales).toFixed(2));
         graphData[Number(month) - 1].Profit = graphData[Number(month) - 1].Profit + Number(item.Profit);
         graphData[Number(month) - 1].itemsSold = graphData[Number(month) - 1].itemsSold + Number(item.Quantity);
+
+        {/*pie chart data */}
         graphData[Number(month) - 1].region?.map((region) => { 
           if (region && region.name == item.Region) { 
             region.value = region.value + Number(item.Sales);
@@ -61,7 +63,7 @@ const Recharts = ({
         });
       }
     });
-
+    {/* calculate the profit ratio as we dont have profit ratio field present in the data*/}
     graphData.map((item): void => {
       item.Profit_ratio = parseFloat((item.Profit/item.Total).toFixed(3));
     });
@@ -70,27 +72,18 @@ const Recharts = ({
     setItemsSold(graphData.reduce((acc, item) => acc + item.itemsSold, 0));
     setGrandTotal(graphData.reduce((acc, item) => acc + item.Total, 0))
     
-    const regionData ={
-      south: 0,
-      central: 0,
-      east: 0,
-      west: 0
-    }
+    {/*Region data for the whole year */}
+    const regionData:{
+      south?: number,
+      central?: number,
+      east?: number,
+      west?: number
+    
+    } ={  }
+    
     graphData.map((item) => {
-      
       item.region?.map((region) => {
-        if(region.name == 'South'){
-          regionData.south = region.value
-        }
-        if(region.name == 'Central'){
-          regionData.central = region.value
-        }
-        if(region.name == 'East'){
-          regionData.east = region.value
-        }
-        if(region.name == 'West'){
-          regionData.west = region.value
-        }
+        regionData[region.name.toLowerCase()] = region.value
       })
     })
     sendDataToParent(regionData)

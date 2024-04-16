@@ -8,11 +8,9 @@ import {
   getSortedRowModel,
   useReactTable,
   getExpandedRowModel,
-
 } from "@tanstack/react-table";
 import Data from '../libs/data';
 import { Box, Button, ButtonGroup, Icon,  Text, } from "@chakra-ui/react";
-// import EditableCell from './EditableCell';
 import columns from '../libs/columns';
 import Filters from './Table/Filters';
 import SortIcon from './icons/SortIcon';
@@ -77,17 +75,21 @@ const DataTable = () => {
     getExpandedRowModel: getExpandedRowModel(),
     onGlobalFilterChange: setGlobalFilter,
     onColumnVisibilityChange: setColumnVisibility,
-
-    
   });
+
+  {/*getting values for  filter dropdown*/}
   const productsNameAll = table.getCoreRowModel().flatRows.map(row => row.getValue("Product_Name"))
   const productsIdAll = table.getCoreRowModel().flatRows.map(row => row.getValue("Product_ID"))
   const ordersIdAll = table.getCoreRowModel().flatRows.map(row => row.getValue("Order_ID"))
   const statesAll = table.getCoreRowModel().flatRows.map(row => row.getValue("State"))
 
+  {/*statesAll contains state names multiple time, so using set to have only unique values*/}
   const newStatesAll = [... new Set(statesAll)]
+
+  {/* creating an object that has state and empty array */}
   const cityInit:any = newStatesAll.reduce((acc:object,cur: any)=>({...acc, [cur]:[]}),{})
-  
+
+  {/*filling the cityInit object with city names for each state*/}
   data.map((row:any) => {
     if(row.State in cityInit){
       cityInit[row.State] = [...new Set([...cityInit[row.State], row.City])]
@@ -95,13 +97,15 @@ const DataTable = () => {
   }
   )
 
-  
-  
 
   const addData = (newData: { order: string; name: string; sales: number; region: string; profit: number; }) => {
-    setOpenform(false)
+    //setOpenform(false)
+
+    {/*get all the order id and then checking if the order id already exists in the table*/}
     const ordersIds = table.getCoreRowModel().flatRows.map(row => row.getValue("Order_ID"))
     const rowIds = table.getCoreRowModel().flatRows.map(row => row.getValue("Row_ID"))
+
+    {/*if the order id does not exist in the table, then add the new data to the table*/}
     if(!ordersIds.includes(newData.order)){
       setData([...data, {
         Row_ID: String(rowIds.length + 1),
@@ -138,6 +142,7 @@ const DataTable = () => {
         });
     }
     else {
+      {/*if the order id already exists in the table, then show a toast message*/}
       toast.error(`Id ${newData.order} already exists in the table!`, {
         position: "top-center",
         autoClose: 5000,
@@ -283,6 +288,7 @@ const DataTable = () => {
                     desc: " 🔽",
                   }[header.column.getIsSorted()]
                 }
+                {/*min value filtering */}
                 {(header.column.columnDef.header === "Profit" 
                 || header.column.columnDef.header === 'Sales'
                 || header.column.columnDef.header === 'Discount'
@@ -307,8 +313,7 @@ const DataTable = () => {
                   </div>
                 )}
 
-
-
+                {/* resizing the table columns */}
                 <Box
                   onMouseDown={header.getResizeHandler()}
                   onTouchStart={header.getResizeHandler()}
@@ -323,11 +328,12 @@ const DataTable = () => {
             ))}
           </Box>
         ))}
+
+        {/* when we have a grouped value */}
         {table.getRowModel().rows.length ? table.getRowModel().rows.map((row) => (
           <Box className="flex w-fit z-40" key={row.id}>
             {row.getVisibleCells().map((cell) => (
               <Box className="inset-y-1 flex items-center justify-center" w={cell.column.getSize()} key={cell.id}>
-                {/* {flexRender(cell.column.columnDef.cell, cell.getContext())} */}
                 {cell.getIsGrouped() ? (
                         // If it's a grouped cell, add an expander and row count
                         <>
@@ -375,7 +381,8 @@ const DataTable = () => {
         }
       </Box>
       <br />
-      <Box ml={96} mb={12} className=' bottom-0 right-96 z-0'> {/* if Form is popup fixed -bottom-2 right-96 z-0 */}
+      {/* Pagiation */}
+      <Box ml={96} mb={12} className=' bottom-0 right-96 z-0'> {/* if Form is a popup fixed -bottom-2 right-96 z-0 */}
       <ButtonGroup size="sm" isAttached variant="outline">
       <Button 
           onClick={() => table.setPageIndex(0)}
@@ -429,6 +436,8 @@ const DataTable = () => {
       </ButtonGroup>
       </Box>
     </Box>
+    
+    {/* form */}
     <div className="relative bg-gray-200 rounded-lg shadow transition ease-in-out pb-12"> 
     <h2 className='flex justify-center pt-12 text-lg'>Add data to the table</h2>
             <Form addEvent={addData}/>

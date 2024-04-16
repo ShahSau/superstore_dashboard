@@ -7,7 +7,7 @@ import { Tooltip, InteractionData } from "./bubbleChart/Tooltip";
 
 const MARGIN = { top: 60, right: 60, bottom: 60, left: 60 };
 
-const BubbleChart = ({Data}: {Data: any[]}) => {
+const BubbleChart = ({Data}: {Data: object[]}) => {
     const [filter] = useState<string[]>([
       "DaysToShip",
       "Discount",
@@ -25,9 +25,9 @@ const BubbleChart = ({Data}: {Data: any[]}) => {
       "Sub-Category",
       "Product_Name",
     ]);
-    const [yaxis, setYaxis] = useState<any>(filter[3]);
-    const [xaxis, setXaxis] = useState<any>(filter[1]);
-    const [group, setGroup] = useState<any>(breakdown[1]);
+    const [yaxis, setYaxis] = useState<string>(filter[2]);
+    const [xaxis, setXaxis] = useState<string>(filter[3]);
+    const [group, setGroup] = useState<string>(breakdown[1]);
     // size can be another filter
 
 
@@ -37,48 +37,51 @@ const BubbleChart = ({Data}: {Data: any[]}) => {
   
     const [hovered, setHovered] = useState<InteractionData | null>(null);
 
-    // Scales
+    // Scaling of the axes
     const [minY, maxY] = d3.extent(data.map((d:any) => Number(d[yaxis]))) as [
         number,
         number
       ];
-  const yScale = d3.scaleLinear().domain([minY, maxY*1.05]).range([boundsHeight, 0]).nice();
-  const [minX, maxX] = d3.extent(data.map((d:any) => Number(d[xaxis]))) as [
-    number,
-    number
-  ];
-  const xScale = d3
-    .scaleLinear()
-    .domain([minX, maxX])
-    .range([0, boundsWidth]).nice();
-  const allGroups = data.map((d:any) => String(d[group]));
-  const colorScale = d3
-    .scaleOrdinal<string>()
-    .domain([... new Set(allGroups)])
-    .range(["#e0ac2b", "#e85252", "#6689c6", "#9a6fb0", "#a53253"]);
+    const yScale = d3.scaleLinear().domain([minY, maxY*1.05]).range([boundsHeight, 0]).nice();
 
-// Build the shapes
-const allShapes = data.map((d:any, i) => {
-    return (
-      <circle
-        key={i}
-        r={8}
-        cx={xScale(Number(d[xaxis]))}
-        cy={yScale(Number(d[yaxis]))}
-        stroke={colorScale(d[group])}
-        fill={colorScale(d[group])}
-        fillOpacity={0.7}
-        onMouseEnter={() =>
-          setHovered({
-            xPos: xScale(Number(d[xaxis])),
-            yPos: yScale(Number(d[yaxis])),
-            name: `${group}:${d[group]}, ${xaxis}:${d[xaxis]}, ${yaxis}: ${d[yaxis]}`, // can put anything in here
-          })
-        }
-        onMouseLeave={() => setHovered(null)}
-      />
-    );
-  });
+    const [minX, maxX] = d3.extent(data.map((d:any) => Number(d[xaxis]))) as [
+      number,
+      number
+    ];
+    const xScale = d3
+      .scaleLinear()
+      .domain([minX, maxX])
+      .range([0, boundsWidth]).nice();
+
+      // Color scale
+    const allGroups = data.map((d:any) => String(d[group]));
+    const colorScale = d3
+      .scaleOrdinal<string>()
+      .domain([... new Set(allGroups)])
+      .range(["#e0ac2b", "#e85252", "#6689c6", "#9a6fb0", "#a53253"]);
+
+    // Build the shapes
+    const allShapes = data.map((d:any, i) => {
+        return (
+          <circle
+            key={i}
+            r={8}
+            cx={xScale(Number(d[xaxis]))}
+            cy={yScale(Number(d[yaxis]))}
+            stroke={colorScale(d[group])}
+            fill={colorScale(d[group])}
+            fillOpacity={0.7}
+            onMouseEnter={() =>
+              setHovered({
+                xPos: xScale(Number(d[xaxis])),
+                yPos: yScale(Number(d[yaxis])),
+                name: `${group}:${d[group]}, ${xaxis}:${d[xaxis]}, ${yaxis}: ${d[yaxis]}`,
+              })
+            }
+            onMouseLeave={() => setHovered(null)}
+          />
+        );
+      });
 
   return(
     <>
@@ -135,7 +138,8 @@ const allShapes = data.map((d:any, i) => {
           </select>
       </div>
     </div>
-        
+    
+    {/*bubble chart */}
     <div style={{ position: "relative" }}>
       <svg width={700} height={700}>
         <g

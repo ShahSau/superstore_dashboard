@@ -3,9 +3,10 @@ import { X } from 'lucide-react';
 const RegionFilters = ({ columnFilters, setColumnFilters, innerData, outerData }: { columnFilters: any[], setColumnFilters: any, innerData:any[], outerData:any[] }) => {
 const filter = "State";
         
+    {/*outer is state list and inner is city list*/}
     const taskName = columnFilters.find((f) => f.id === filter)?.value || ""; 
 
-        // need to remove the previous filter before adding the new one
+        // need to remove the previous state filter before adding the new one
         const removeFilter = () =>{
             const id = "State"
             setColumnFilters((prev: any[]) =>
@@ -13,7 +14,7 @@ const filter = "State";
             );
         }
 
-        // need to remove the previous filter before adding the new one
+        // need to remove the previous city filter before adding the new one
         const removeFilterCity = () =>{
             const id = "City"
             setColumnFilters((prev: any[]) =>
@@ -21,8 +22,7 @@ const filter = "State";
             );
         }
             
-
-
+        {/** search state */}
         const onFilterChange = ( value: string) =>{
             removeFilter()
             removeFilterCity()
@@ -36,7 +36,8 @@ const filter = "State";
                 })
             );
         }
-
+            
+        {/** search city */}    
         const onFilterChangeCity = (value: string) =>{
             removeFilter()
             removeFilterCity()
@@ -81,6 +82,7 @@ const filter = "State";
                                  
                             >
                                 <select id="countries" 
+                                // check if the value is state or city first and then apply filter
                                 onChange={(e) => {
                                     if(!outerData.includes(e.target.value)){
                                         onFilterChangeCity(e.target.value)
@@ -97,9 +99,8 @@ const filter = "State";
                                             <option key={index} value={d}>{d}</option>
                                             {
                                                 innerData[d].map((inner:any, index:any) => (
-                                                    <>
                                                     <option key={index} value={inner}>&ensp;&ensp;&ensp;&ensp;{inner}</option>
-                                                    </>
+                                                    
                                                 ))
                                             }
                                             
