@@ -1,10 +1,8 @@
 import {  useState } from "react";
 import * as d3 from "d3";
-// import Data from "../libs/data";
 import { AxisLeft } from "./bubbleChart/AxisLeft";
 import { AxisBottom } from "./bubbleChart/AxisBottom";
 import { Tooltip, InteractionData } from "./bubbleChart/Tooltip";
-// import styles from "./scatterplot.module.css";
 
 
 const MARGIN = { top: 60, right: 60, bottom: 60, left: 60 };

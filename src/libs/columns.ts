@@ -7,8 +7,6 @@ const columns = [
       size: 225,
      cell: EditableCell,
      visible: true,
-     //  enableColumnFilter: true,
-     //  filterFn: "includesString",
     },
     {
      accessorKey: "Product_Name",
@@ -32,7 +30,6 @@ const columns = [
      size: 225,
      cell: EditableCell,
      enableColumnFilter: true,
-      //filterFn: "includesString",
    },
    {
      accessorKey: "Product_ID",
@@ -56,7 +53,6 @@ const columns = [
      size: 225,
      cell: EditableCell,
      enableColumnFilter: true,
-     // filterFn: "includesString",
    },
    {
      accessorKey: "Ship_Date",
@@ -64,7 +60,6 @@ const columns = [
      size: 225,
      cell: EditableCell,
      enableColumnFilter: true,
-     // filterFn: "includesString",
    },
    {
      accessorKey: "Ship_Mode",
@@ -72,7 +67,6 @@ const columns = [
      size: 225,
      cell: EditableCell,
      enableColumnFilter: true,
-     // filterFn: "includesString",
    },
    {
      accessorKey: "Customer_ID",
@@ -80,7 +74,6 @@ const columns = [
      size: 225,
      cell: EditableCell,
      enableColumnFilter: true,
-     // filterFn: "includesString",
    },
    {
      accessorKey: "Customer_Name",
@@ -88,7 +81,6 @@ const columns = [
      size: 225,
      cell: EditableCell,
      enableColumnFilter: true,
-     // filterFn: "includesString",
    },
    {
      accessorKey: "Segment",
@@ -96,7 +88,6 @@ const columns = [
      size: 225,
      cell: EditableCell,
      enableColumnFilter: true,
-     // filterFn: "includesString",
    },
    {
      accessorKey: "City",
@@ -104,7 +95,6 @@ const columns = [
      size: 225,
      cell: EditableCell,
      enableColumnFilter: true,
-     // filterFn: "includesString",
    },
    
    {
@@ -113,7 +103,6 @@ const columns = [
      size: 225,
      cell: EditableCell,
      enableColumnFilter: true,
-     // filterFn: "includesString",
    },
    {
      accessorKey: "Category",
@@ -121,7 +110,6 @@ const columns = [
      size: 225,
      cell: EditableCell,
      enableColumnFilter: true,
-     // filterFn: "includesString",
    },
    {
      accessorKey: "Sub-Category",
@@ -129,7 +117,6 @@ const columns = [
      size: 225,
      cell: EditableCell,
      enableColumnFilter: true,
-     // filterFn: "includesString",
    },
    {
      accessorKey: "Sales",
@@ -137,7 +124,6 @@ const columns = [
      size: 225,
      cell: EditableCell,
      enableColumnFilter: true,
-     // filterFn: "includesString",
    },
    {
      accessorKey: "Quantity",
@@ -145,7 +131,6 @@ const columns = [
      size: 225,
      cell: EditableCell,
      enableColumnFilter: true,
-     // filterFn: "includesString",
    },
    {
      accessorKey: "Discount",
@@ -153,7 +138,6 @@ const columns = [
      size: 225,
      cell: EditableCell,
      enableColumnFilter: true,
-     // filterFn: "includesString",
    },
    
  ];

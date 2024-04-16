@@ -3,7 +3,7 @@ import { X } from 'lucide-react';
 const RegionFilters = ({ columnFilters, setColumnFilters, innerData, outerData }: { columnFilters: any[], setColumnFilters: any, innerData:any[], outerData:any[] }) => {
 const filter = "State";
         
-    const taskName = columnFilters.find((f) => f.id === filter)?.value || ""; //here
+    const taskName = columnFilters.find((f) => f.id === filter)?.value || ""; 
 
         // need to remove the previous filter before adding the new one
         const removeFilter = () =>{
