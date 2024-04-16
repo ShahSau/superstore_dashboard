@@ -34,7 +34,6 @@ const BubbleChart = ({Data}: {Data: any[]}) => {
 
 
     const data = Data;
-    console.log(data)
     const boundsWidth = 700 - MARGIN.right - MARGIN.left;
     const boundsHeight = 700 - MARGIN.top - MARGIN.bottom;
   

@@ -85,7 +85,6 @@ const Recharts = ({
   }
   ,[year])
 
-
   return (
   <div className='overflow-hidden'>
     <div className="flow-root mb-4">
@@ -104,6 +103,7 @@ const Recharts = ({
             <option>2017</option>
             <option>2016</option>
             <option>2015</option>
+            <option>2014</option>
           </select>
         </div>
 
@@ -131,7 +131,7 @@ const Recharts = ({
     </div>
 
 
-
+{/* merge the follwoing two graphs into one code*/}
 {/* Profit Ratio*/}
   <div className="flex items-center justify-center mt-2">
     <h2 className='text-2xl '>Profit Ratio</h2>
