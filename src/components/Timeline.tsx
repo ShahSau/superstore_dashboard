@@ -111,8 +111,7 @@ const Timeline = ({Data, selection}: {Data: any[], selection:string}) => {
                     </linearGradient>
                     </defs>
                     <XAxis dataKey={selection} />
-                    {/* //unit={'$'} */}
-                    <YAxis type="number" /> 
+                    <YAxis type="number" unit={value === "Sales" || value==="Profit" ? "$" : value === "Discount" || value === "ProfitRatio" ? "%":""}/> 
                     <CartesianGrid strokeDasharray="3 3" vertical={false} horizontal={false}/>
                     <Tooltip />
                     <Area type="monotone" dataKey={value} stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" dot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 2,r:2}} activeDot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 5,r:10}}/>
