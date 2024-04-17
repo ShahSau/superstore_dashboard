@@ -3,7 +3,7 @@ import { X } from 'lucide-react';
 
 const Filters = ({ columnFilters, setColumnFilters, filter, data,filter_name }: { columnFilters: any[], setColumnFilters: any, filter: string, data:any[],filter_name:string }) => {
 
-        const taskName = columnFilters.find((f) => f.id === filter)?.value || ""; //here
+        const taskName = columnFilters.find((f) => f.id === filter)?.value || ""; 
 
         const onFilterChange = (id: string, value: string) =>
             setColumnFilters((prev: any[]) =>

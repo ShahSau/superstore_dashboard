@@ -60,7 +60,6 @@ const BubbleChart = ({Data}: {Data: object[]}) => {
       setResult(initresult)
     }
     , [group])
-    console.log(result)
     
     const boundsWidth = 700 - MARGIN.right - MARGIN.left;
     const boundsHeight = 700 - MARGIN.top - MARGIN.bottom;

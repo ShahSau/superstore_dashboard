@@ -90,7 +90,6 @@ const Timeline = ({Data, selection}: {Data: any[], selection:string}) => {
         obj = Object.fromEntries(Object.entries(obj).map(([key, value]) => [key, {...value, DaysToShip: (value.DaysToShipSum/value.items).toFixed(2), Discount: (value.DiscountSum/value.items).toFixed(2), ProfitRatio: (value.ProfitRatioSum/value.items).toFixed(2)}]))
         setGraphData(obj)
     }, [selection])
-    console.log(graphData)
     return (
     <div className="mt-2">
         {values.map((value) => {

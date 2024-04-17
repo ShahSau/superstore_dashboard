@@ -42,12 +42,6 @@ const Recharts = ({
 
   // fitler the data based on the year and calculate the stats
   useEffect(() => {
-    // graphData.map((item)=>{
-    //   item.Total = 0
-    //   item.Profit = 0
-    //   item.itemsSold = 0
-    //   item.Profit_ratio = 0
-    // })
     Data.map((item) => {
       if (item.Order_Date.split("-")[2] == year) { 
         const month = item.Order_Date.split("-")[1]; 
@@ -147,7 +141,7 @@ const Recharts = ({
         </div>
         <div className="flex items-center justify-center bg-gray-50">
           <AreaChart width={1000} height={350} data={graphData}
-          margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
+          margin={{ top: 10, right: 30, left: 18, bottom: 0 }}>
           <defs>
             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
