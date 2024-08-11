@@ -57,7 +57,7 @@ const DashboardLayout = ({
                 </div>
             </div>
         </div>
-        <main className="h-full md:ml-72">
+        <main className="h-full md:ml-72 overflow-x-hidden">
             {children}
         </main>
     </div>

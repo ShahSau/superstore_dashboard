@@ -10,6 +10,12 @@ const initialGraphData= [{
       { name: "Central", value: 0 },
       { name: "South", value: 0 },
     
+    ],
+    "profit_region":[
+      { name: "East", value: 0 },
+      { name: "West", value: 0 },
+      { name: "Central", value: 0 },
+      { name: "South", value: 0 },
     ]
   },
   {
@@ -23,7 +29,12 @@ const initialGraphData= [{
       { name: "West", value: 0 },
       { name: "Central", value: 0 },
       { name: "South", value: 0 },
-    
+    ],
+    "profit_region":[
+      { name: "East", value: 0 },
+      { name: "West", value: 0 },
+      { name: "Central", value: 0 },
+      { name: "South", value: 0 },
     ]
   },
   {
@@ -37,7 +48,12 @@ const initialGraphData= [{
       { name: "West", value: 0 },
       { name: "Central", value: 0 },
       { name: "South", value: 0 },
-    
+    ],
+    "profit_region":[
+      { name: "East", value: 0 },
+      { name: "West", value: 0 },
+      { name: "Central", value: 0 },
+      { name: "South", value: 0 },
     ]
   },
   {
@@ -51,7 +67,12 @@ const initialGraphData= [{
       { name: "West", value: 0 },
       { name: "Central", value: 0 },
       { name: "South", value: 0 },
-    
+    ],
+    "profit_region":[
+      { name: "East", value: 0 },
+      { name: "West", value: 0 },
+      { name: "Central", value: 0 },
+      { name: "South", value: 0 },
     ]
   },
   {
@@ -65,7 +86,12 @@ const initialGraphData= [{
       { name: "West", value: 0 },
       { name: "Central", value: 0 },
       { name: "South", value: 0 },
-    
+    ],
+    "profit_region":[
+      { name: "East", value: 0 },
+      { name: "West", value: 0 },
+      { name: "Central", value: 0 },
+      { name: "South", value: 0 },
     ]
   },
   {
@@ -79,7 +105,12 @@ const initialGraphData= [{
       { name: "West", value: 0 },
       { name: "Central", value: 0 },
       { name: "South", value: 0 },
-    
+    ],
+    "profit_region":[
+      { name: "East", value: 0 },
+      { name: "West", value: 0 },
+      { name: "Central", value: 0 },
+      { name: "South", value: 0 },
     ]
   },
   {
@@ -93,7 +124,12 @@ const initialGraphData= [{
       { name: "West", value: 0 },
       { name: "Central", value: 0 },
       { name: "South", value: 0 },
-    
+    ],
+    "profit_region":[
+      { name: "East", value: 0 },
+      { name: "West", value: 0 },
+      { name: "Central", value: 0 },
+      { name: "South", value: 0 },
     ]
   },
   {
@@ -107,7 +143,12 @@ const initialGraphData= [{
       { name: "West", value: 0 },
       { name: "Central", value: 0 },
       { name: "South", value: 0 },
-    
+    ],
+    "profit_region":[
+      { name: "East", value: 0 },
+      { name: "West", value: 0 },
+      { name: "Central", value: 0 },
+      { name: "South", value: 0 },
     ]
   },
   {
@@ -121,7 +162,12 @@ const initialGraphData= [{
       { name: "West", value: 0 },
       { name: "Central", value: 0 },
       { name: "South", value: 0 },
-    
+    ],
+    "profit_region":[
+      { name: "East", value: 0 },
+      { name: "West", value: 0 },
+      { name: "Central", value: 0 },
+      { name: "South", value: 0 },
     ]
   },
   {
@@ -135,7 +181,12 @@ const initialGraphData= [{
       { name: "West", value: 0 },
       { name: "Central", value: 0 },
       { name: "South", value: 0 },
-    
+    ],
+    "profit_region":[
+      { name: "East", value: 0 },
+      { name: "West", value: 0 },
+      { name: "Central", value: 0 },
+      { name: "South", value: 0 },
     ]
   },
   {
@@ -149,7 +200,12 @@ const initialGraphData= [{
       { name: "West", value: 0 },
       { name: "Central", value: 0 },
       { name: "South", value: 0 },
-    
+    ],
+    "profit_region":[
+      { name: "East", value: 0 },
+      { name: "West", value: 0 },
+      { name: "Central", value: 0 },
+      { name: "South", value: 0 },
     ]
   },
   {
@@ -163,7 +219,12 @@ const initialGraphData= [{
       { name: "West", value: 0 },
       { name: "Central", value: 0 },
       { name: "South", value: 0 },
-    
+    ],
+    "profit_region":[
+      { name: "East", value: 0 },
+      { name: "West", value: 0 },
+      { name: "Central", value: 0 },
+      { name: "South", value: 0 },
     ]
   }]
 

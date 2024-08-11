@@ -14,9 +14,11 @@ import initialGraphData from '../libs/graphData'
 
  
 const Recharts = ({
-  sendDataToParent
+  sendDataToParent,
+  sendDataToParentFromChild
 }: {
   sendDataToParent: (data: any) => void
+  sendDataToParentFromChild: (data: any) => void
 }) => {
   const [year, setYear] = useState('2017')
   const [grandTotal, setGrandTotal] = useState(0)
@@ -55,8 +57,16 @@ const Recharts = ({
             region.value = region.value + Number(item.Sales);
           }
         });
+
+        {/*profit pie chart data */}
+        graphData[Number(month) - 1].profit_region?.map((region) => {
+          if (region && region.name == item.Region) {
+            region.value = region.value + Number(item.Quantity);
+          }
+        });
       }
     });
+
     {/* calculate the profit ratio as we dont have profit ratio field present in the data*/}
     graphData.map((item): void => {
       item.Profit_ratio = parseFloat((item.Profit/item.Total).toFixed(3));
@@ -65,9 +75,17 @@ const Recharts = ({
     setProfit(graphData.reduce((acc, item) => acc + item.Profit, 0));
     setItemsSold(graphData.reduce((acc, item) => acc + item.itemsSold, 0));
     setGrandTotal(graphData.reduce((acc, item) => acc + item.Total, 0))
-    
+    console.log(graphData,"graphData")
     {/*Region data for the whole year */}
     const regionData:{
+      south?: number,
+      central?: number,
+      east?: number,
+      west?: number
+    
+    } ={  }
+
+    const regionDataProfit:{
       south?: number,
       central?: number,
       east?: number,
@@ -80,7 +98,15 @@ const Recharts = ({
         regionData[region.name.toLowerCase()] = region.value
       })
     })
+
+    graphData.map((item) => {
+      item.profit_region?.map((region) => {
+        regionDataProfit[region.name.toLowerCase()] = region.value
+      })
+    })
     sendDataToParent(regionData)
+    sendDataToParentFromChild(regionDataProfit)
+   
   }
   ,[year])
 

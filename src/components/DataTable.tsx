@@ -78,11 +78,11 @@ const DataTable = () => {
   });
 
   {/*getting values for  filter dropdown*/}
-  const productsNameAll = table.getCoreRowModel().flatRows.map(row => row.getValue("Product_Name"))
-  const productsIdAll = table.getCoreRowModel().flatRows.map(row => row.getValue("Product_ID"))
-  const ordersIdAll = table.getCoreRowModel().flatRows.map(row => row.getValue("Order_ID"))
-  const statesAll = table.getCoreRowModel().flatRows.map(row => row.getValue("State"))
-  const cityAll = table.getCoreRowModel().flatRows.map(row => row.getValue("City"))
+  const productsNameAll = table.getCoreRowModel().flatRows.map((row:any) => row.getValue("Product_Name"))
+  const productsIdAll = table.getCoreRowModel().flatRows.map((row:any) => row.getValue("Product_ID"))
+  const ordersIdAll = table.getCoreRowModel().flatRows.map((row:any) => row.getValue("Order_ID"))
+  const statesAll = table.getCoreRowModel().flatRows.map((row:any) => row.getValue("State"))
+  const cityAll = table.getCoreRowModel().flatRows.map((row:any) => row.getValue("City"))
 
   {/*statesAll, cityAll contains state, city names multiple time, so using set to have only unique values*/}
   const newStatesAll = [... new Set(statesAll)]
@@ -99,64 +99,64 @@ const DataTable = () => {
   })
 
 
-  const addData = (newData: { order: string; name: string; sales: number; region: string; profit: number; }) => {
-    //setOpenform(false)
+  // const addData = (newData: { order: string; name: string; sales: number; region: string; profit: number; }) => {
+  //   //setOpenform(false)
 
-    {/*get all the order id and then checking if the order id already exists in the table*/}
-    const ordersIds = table.getCoreRowModel().flatRows.map(row => row.getValue("Order_ID"))
-    const rowIds = table.getCoreRowModel().flatRows.map(row => row.getValue("Row_ID"))
+  //   {/*get all the order id and then checking if the order id already exists in the table*/}
+  //   const ordersIds = table.getCoreRowModel().flatRows.map((row:any) => row.getValue("Order_ID"))
+  //   const rowIds = table.getCoreRowModel().flatRows.map((row:any) => row.getValue("Row_ID"))
 
-    {/*if the order id does not exist in the table, then add the new data to the table*/}
-    if(!ordersIds.includes(newData.order)){
-      setData([...data, {
-        Row_ID: String(rowIds.length + 1),
-        Order_ID: newData.order,
-        Product_Name: newData.name,
-        Sales: String(newData.sales),
-        Region: newData.region,
-        Profit: String(newData.profit),
-        Order_Date: '',
-        Ship_Date: '',
-        Ship_Mode: '',
-        Customer_ID: '',
-        Customer_Name: '',
-        Segment: '',
-        Country: '',
-        City: '',
-        State: '',
-        Postal_Code: '',
-        Product_ID: '',
-        Category: '',
-        'Sub-Category': '',
-        Quantity: '',
-        Discount: ''
-      }])
-      toast.success(`${newData.name} with id ${newData.order} is added to the table`, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-        });
-    }
-    else {
-      {/*if the order id already exists in the table, then show a toast message*/}
-      toast.error(`Id ${newData.order} already exists in the table!`, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-        });
-    }
+  //   {/*if the order id does not exist in the table, then add the new data to the table*/}
+  //   if(!ordersIds.includes(newData.order)){
+  //     setData([...data, {
+  //       Row_ID: String(rowIds.length + 1),
+  //       Order_ID: newData.order,
+  //       Product_Name: newData.name,
+  //       Sales: String(newData.sales),
+  //       Region: newData.region,
+  //       Profit: String(newData.profit),
+  //       Order_Date: '',
+  //       Ship_Date: '',
+  //       Ship_Mode: '',
+  //       Customer_ID: '',
+  //       Customer_Name: '',
+  //       Segment: '',
+  //       Country: '',
+  //       City: '',
+  //       State: '',
+  //       Postal_Code: '',
+  //       Product_ID: '',
+  //       Category: '',
+  //       'Sub-Category': '',
+  //       Quantity: '',
+  //       Discount: ''
+  //     }])
+  //     toast.success(`${newData.name} with id ${newData.order} is added to the table`, {
+  //       position: "top-center",
+  //       autoClose: 5000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       theme: "colored",
+  //       });
+  //   }
+  //   else {
+  //     {/*if the order id already exists in the table, then show a toast message*/}
+  //     toast.error(`Id ${newData.order} already exists in the table!`, {
+  //       position: "top-center",
+  //       autoClose: 5000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       theme: "colored",
+  //       });
+  //   }
 
-  }
+  // }
 
   return (
     <>
@@ -181,7 +181,7 @@ const DataTable = () => {
       </div>
     </div>
 
-    <Box className='mt-2 mx-2 h-full'>
+    <Box className='mt-2 mx-2 h-full overflow-x-scroll'>
       {/* column change*/}
       <div className='flex justify-start items-start space-x-24'>
       <div>
@@ -200,7 +200,7 @@ const DataTable = () => {
                 </h3> 
             </div>
             <div className="z-50 bg-gray-300 divide-y divide-gray-700 rounded-lg shadow w-44 h-1/2">
-              {table.getAllLeafColumns().map(column => {
+              {table.getAllLeafColumns().map((column:any) => {
                 return (
                   <div key={column.id} className="px-1">
                     <label>
@@ -251,9 +251,9 @@ const DataTable = () => {
     </div> */}
     </div>
       <Box className="border-solid border-2 border-[#8884d8]" w={table.getTotalSize()}>
-        {table.getHeaderGroups().map((headerGroup) => (
+        {table.getHeaderGroups().map((headerGroup:any) => (
           <Box className="flex w-fit" key={headerGroup.id}>
-            {headerGroup.headers.map((header) => (
+            {headerGroup.headers.map((header:any) => (
               <Box className="relative flex items-center justify-center text-center p-2 uppercase" w={header.getSize()} key={header.id}>
                 {header.isPlaceholder ? null : (<div>
                   {header.column.getCanGroup() ? (
@@ -331,9 +331,9 @@ const DataTable = () => {
         ))}
 
         {/* when we have a grouped value */}
-        {table.getRowModel().rows.length ? table.getRowModel().rows.map((row) => (
+        {table.getRowModel().rows.length ? table.getRowModel().rows.map((row:any) => (
           <Box className="flex w-fit z-40" key={row.id}>
-            {row.getVisibleCells().map((cell) => (
+            {row.getVisibleCells().map((cell:any) => (
               <Box className="inset-y-1 flex items-center justify-center" w={cell.column.getSize()} key={cell.id}>
                 {cell.getIsGrouped() ? (
                         // If it's a grouped cell, add an expander and row count
@@ -383,7 +383,7 @@ const DataTable = () => {
       </Box>
       <br />
       {/* Pagiation */}
-      <Box ml={96} mb={12} className=' bottom-0 right-96 z-0'> {/* if Form is a popup fixed -bottom-2 right-96 z-0 */}
+      <Box ml={96} mb={12} className='relative bottom-2 -right-96 z-0 '> {/* if Form is a popup fixed -bottom-2 right-96 z-0 */}
       <ButtonGroup size="sm" isAttached variant="outline">
       <Button 
           onClick={() => table.setPageIndex(0)}
@@ -439,10 +439,10 @@ const DataTable = () => {
     </Box>
     
     {/* form */}
-    <div className="relative bg-gray-200 rounded-lg shadow transition ease-in-out pb-12"> 
+    {/* <div className="relative bg-gray-200 rounded-lg shadow transition ease-in-out pb-12"> 
     <h2 className='flex justify-center pt-12 text-lg'>Add data to the table</h2>
             <Form addEvent={addData}/>
-    </div>
+    </div> */}
     <ToastContainer
       position="top-center"
       autoClose={5000}
