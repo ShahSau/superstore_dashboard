@@ -33,9 +33,26 @@ const BubbleChart = ({Data}: {Data: object[]}) => {
 
 
     const data = Data;
-    const initresult: any[] = []
+    interface Result {
+      [key: string]: {
+        Category: string;
+        DiscountSum: number;
+        ProfitRatioSum: number;
+        DaysToShipSum: number;
+        items: number;
+        Profit: number;
+        Sales: number;
+        Quantity: number;
+        Returns: number;
+        Discount: number;
+        ProfitRatio: number;
+        DaysToShip: number;
+      };
+    }
+    
+    const initresult: Result[] = [];
     useEffect(() => {
-      data.reduce(function(res, value) {
+      data.reduce(function(res: Result, value) {
         if (!res[value[group]]) {
           res[value[group]] = { Category: value[group], DiscountSum:0, ProfitRatioSum:0, DaysToShipSum:0, items:0, Profit: 0, Sales: 0, Quantity:0, Returns: 0, Discount: 0, ProfitRatio: 0, DaysToShip: 0};
           initresult.push(res[value[group]])
