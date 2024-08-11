@@ -75,7 +75,7 @@ const Recharts = ({
     setProfit(graphData.reduce((acc, item) => acc + item.Profit, 0));
     setItemsSold(graphData.reduce((acc, item) => acc + item.itemsSold, 0));
     setGrandTotal(graphData.reduce((acc, item) => acc + item.Total, 0))
-    console.log(graphData,"graphData")
+
     {/*Region data for the whole year */}
     const regionData:{
       south?: number,
@@ -83,7 +83,12 @@ const Recharts = ({
       east?: number,
       west?: number
     
-    } ={  }
+    } ={ 
+      south: 0,
+      central: 0,
+      east: 0,
+      west: 0
+     }
 
     const regionDataProfit:{
       south?: number,
@@ -91,7 +96,12 @@ const Recharts = ({
       east?: number,
       west?: number
     
-    } ={  }
+    } ={ 
+      south: 0,
+      central: 0,
+      east: 0,
+      west: 0
+     }
     
     graphData.map((item) => {
       item.region?.map((region) => {
@@ -117,7 +127,7 @@ const Recharts = ({
   <div className='overflow-hidden'>
     <div className="flow-root mb-4">
         <div className="float-left ml-6">
-             <h1 className="text-2xl font-bold">Dashboard</h1>
+             <h1 className="text-2xl font-bold">Line & Pie Chart</h1>
         </div>
         
         <div className="float-right mr-6">

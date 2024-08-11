@@ -1,7 +1,9 @@
 import { cn } from "../libs/utils";
 import { 
     LayoutDashboard, Table,
-    ScatterChart
+    ScatterChart,
+    LineChart,
+    BarChart
 } from "lucide-react";
 
 import { Link, useLocation } from 'react-router-dom';
@@ -25,11 +27,24 @@ const DashboardLayout = ({
           color: "text-violet-500",
         },
         {
-          label: 'Graphs',
+          label: 'Elements',
           icon: ScatterChart,
-          color: "text-emerald-700", 
+          color: "text-emerald-300", 
           href: '/graph',
         },
+        {
+            label: 'Line & Pie Chart',
+            icon: LineChart,
+            color: "text-pink-700",
+            href: '/line-chart',
+        },
+        {
+            label: 'Bar Chart',
+            icon: BarChart,
+            color: "text-orange-700",
+            href: '/bar-chart',
+        }
+
     ]
     return(
     <div className="h-full relative ">

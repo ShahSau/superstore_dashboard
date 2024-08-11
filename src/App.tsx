@@ -3,8 +3,9 @@ import { Suspense } from 'react'
 import Home from './pages/Home'
 import Table from './pages/Table'
 import Graphs from './pages/Graphs'
-
+import LineChart from './pages/LineChart'
 import ExcelToJsonConverter from './pages/DataConvert'
+import BarChart from './pages/BarChart'
 
 
 const App = () => {
@@ -14,6 +15,8 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/table" element={<Table />} />
         <Route path="/graph" element={<Graphs />} />
+        <Route path="/line-chart" element={<LineChart />} />
+        <Route path="/bar-chart" element={<BarChart />} />
         <Route path="/dataconvert" element={<ExcelToJsonConverter />} />
       </Routes>
     </BrowserRouter>
