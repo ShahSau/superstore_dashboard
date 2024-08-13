@@ -64,8 +64,6 @@ const dataResult: DataResultItem[] = [
 ];
 const BarChartData = () => {
     Data.map((item) => {
-        //item.Sub-Category = item["Sub-Category"]
-        // item[Sub] = item["Sub-Category"];
         if(item.Category === "Furniture"){
             const Sub = item["Sub-Category"];
             dataResult[0][Sub] = Number(item.Sales);
@@ -82,7 +80,7 @@ const BarChartData = () => {
 
     console.log(dataResult);
     return (
-      <ResponsiveContainer width="100%" height="95%">
+      <ResponsiveContainer width="100%" height="91%">
         <BarChart
           width={500}
           height={300}
@@ -96,7 +94,7 @@ const BarChartData = () => {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
-          <YAxis />
+          <YAxis type="number"  unit="$"/>
           <Tooltip />
           <Legend />
           <Bar dataKey="Bookcases" stackId="a" fill="#8884d8" />

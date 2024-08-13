@@ -6,6 +6,9 @@ import Graphs from './pages/Graphs'
 import LineChart from './pages/LineChart'
 import ExcelToJsonConverter from './pages/DataConvert'
 import BarChart from './pages/BarChart'
+import Map from './pages/Map'
+import User from './pages/User'
+import UserAnalysis from './pages/UserAnalysis'
 
 
 const App = () => {
@@ -17,6 +20,9 @@ const App = () => {
         <Route path="/graph" element={<Graphs />} />
         <Route path="/line-chart" element={<LineChart />} />
         <Route path="/bar-chart" element={<BarChart />} />
+        <Route path="/map" element={<Map />} />
+        <Route path="/user" element={<User />} />
+        <Route path="/useranalysis" element={<UserAnalysis />} />
         <Route path="/dataconvert" element={<ExcelToJsonConverter />} />
       </Routes>
     </BrowserRouter>

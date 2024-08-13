@@ -3,7 +3,10 @@ import {
     LayoutDashboard, Table,
     ScatterChart,
     LineChart,
-    BarChart
+    BarChart,
+    Map,
+    User,
+    BookUserIcon
 } from "lucide-react";
 
 import { Link, useLocation } from 'react-router-dom';
@@ -39,10 +42,28 @@ const DashboardLayout = ({
             href: '/line-chart',
         },
         {
+            label: 'Map',
+            icon: Map,
+            color: "text-yellow-700",
+            href: '/map',
+        },
+        {
             label: 'Bar Chart',
             icon: BarChart,
             color: "text-orange-700",
             href: '/bar-chart',
+        },
+        {
+            label: 'Customer Data',
+            icon: User,
+            color: "text-green-700",
+            href: '/user',
+        },
+        {
+            label: 'User Analysis',
+            icon: BookUserIcon,
+            color: "text-red-700",
+            href: '/useranalysis',
         }
 
     ]
