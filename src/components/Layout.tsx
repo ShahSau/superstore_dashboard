@@ -7,7 +7,8 @@ import {
     Map,
     User,
     BookUserIcon,
-    LucideSquareGanttChart
+    LucideSquareGanttChart,
+    UserSearch
 } from "lucide-react";
 
 import { Link, useLocation } from 'react-router-dom';
@@ -29,6 +30,12 @@ const DashboardLayout = ({
           icon: Table,
           href: '/table',
           color: "text-violet-500",
+        },
+        {
+            label: 'Order Analysis',
+            icon: BookUserIcon,
+            color: "text-red-700",
+            href: '/orderanalysis',
         },
         {
           label: 'Elements',
@@ -68,8 +75,8 @@ const DashboardLayout = ({
         },
         {
             label: 'Customer Analysis',
-            icon: BookUserIcon,
-            color: "text-red-700",
+            icon: UserSearch,
+            color: "text-amber-400",
             href: '/useranalysis',
         }
 

@@ -10,6 +10,7 @@ import Map from './pages/Map'
 import User from './pages/User'
 import UserAnalysis from './pages/UserAnalysis'
 import BubleChart from './pages/BubleChart'
+import OrderAnalysis from './pages/OrderAnalysis'
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/user" element={<User />} />
         <Route path="/bubble-chart" element={<BubleChart />} />
         <Route path="/useranalysis" element={<UserAnalysis />} />
+        <Route path="/orderanalysis" element={<OrderAnalysis />} />
         <Route path="/dataconvert" element={<ExcelToJsonConverter />} />
       </Routes>
     </BrowserRouter>

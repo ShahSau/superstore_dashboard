@@ -1,6 +1,5 @@
 
 import { useState } from 'react';
-import BubbleChart from '../components/BubbleChart'
 import DashboardLayout from '../components/Layout'
 import Timeline from '../components/Timeline';
 import Data from "../libs/data";

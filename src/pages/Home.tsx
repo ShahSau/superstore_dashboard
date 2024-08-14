@@ -8,6 +8,8 @@ import Recharts from '../components/Recharts'
 
 const Home = () => {
   
+  //most sold items
+  // customer who paid the most top 5
   
  
   return (
