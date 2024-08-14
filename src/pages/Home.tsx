@@ -2,6 +2,13 @@ import { useEffect, useState } from 'react'
 import DashboardLayout from '../components/Layout'
 import { Activity, BadgeDollarSign, DollarSign, ListOrdered, PanelTop, User } from 'lucide-react';
 import Data from '../libs/data';
+import SalesByYear from '../components/SalesByYear';
+import ProductSoldByYear from '../components/ProductSoldByYear';
+import ProfitByYear from '../components/ProfitByYear';
+import SalesBySubCat from '../components/SalesBySubCat';
+import SalesByCat from '../components/SalesByCat';
+import SalesBySegment from '../components/SalesBySegment';
+
 
 const Home = () => {
   const [grandTotal, setGrandTotal] = useState(0)
@@ -9,11 +16,6 @@ const Home = () => {
   const [profit, setProfit] = useState(0)
   const [numUsers, setNumUsers] = useState(0)
   const [numOrders, setNumOrders] = useState(0)
-
-
-  //most sold items
-  // customer who paid the most top 5
-  // intialize the stats for the card 
 
   const stats = [
     { id: 1, name: 'Total Sales', stat:Math.trunc(grandTotal), icon: DollarSign },
@@ -37,8 +39,7 @@ const Home = () => {
     setNumUsers(793)
     setNumOrders(Data.length)
 
-  }
-  )
+  })
   }, [])
   return (
     <div>
@@ -50,12 +51,12 @@ const Home = () => {
             </div>
           </div>
 
-          <section className=''>
+          <section>
             <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {stats.map((item) => (
                 <div
                   key={item.id}
-                  className="overflow-hidden rounded-lg bg-gray-50 px-4 pb-2 pt-2 shadow sm:px-6 sm:pt-6 w-2/3"
+                  className="overflow-hidden rounded-lg bg-gray-50 px-4 pb-2 pt-2 shadow sm:px-6 sm:pt-6  items-center"
                 >
                   <dt>
                     <div className="absolute rounded-md bg-[#8884d8] p-3">
@@ -70,10 +71,31 @@ const Home = () => {
               ))}
             </dl>
           </section>
+          <section className=''>
+            <div className="lg:flex">
+              <div className="lg:shrink-0">
+                <div className=" w-full lg:h-full">
+                  <h2 className='text-center'>Sales by SubCategory</h2>
+                  <SalesBySubCat />
+                  <h2 className='text-center'>Sales by Category</h2>
+                  <SalesByCat />
+                  <h2 className='text-center'>Sales by Segment</h2>
+                  <SalesBySegment />
+                </div>
+              </div>
+              <div className="p-8 w-full">
+                <h2 className='text-center'>Sales by year</h2>
+                <SalesByYear />
+                <h2 className='text-center'>Product sold by year</h2>
+                <ProductSoldByYear />
+                <h2 className='text-center'>Profit by year</h2>
+                <ProfitByYear />
+              </div>
+            </div>
+          </section>
 
-     
         </div>
-        
+
       </DashboardLayout>
     </div>
   )

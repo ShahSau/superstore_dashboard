@@ -1,11 +1,10 @@
 import React from 'react'
 import Data from '../libs/data'
-import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 
 const OrdersByMonth = () => {
     const monthData:any = []
-    console.log(Data[0]['Order_Date'])
     const month = Data.map((data) => data['Order_Date'].split('-')[1])
     const uniqueMonth = [...new Set(month)]
     uniqueMonth.sort()

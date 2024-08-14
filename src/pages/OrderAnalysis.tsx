@@ -32,7 +32,7 @@ const OrderAnalysis = () => {
 
                     <div className="w-full p-2 lg:w-1/2">
                         <div className="rounded-lg h-80 mt-6">
-                          <h2 className="text-black font-bold text-center">Top 5 Customers by Sales</h2>
+                          <h2 className="text-black font-bold text-center"> Order by category</h2>
                           <OrderByCat />
                         </div>
                     </div>

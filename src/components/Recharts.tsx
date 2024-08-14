@@ -20,9 +20,6 @@ const Recharts = ({
   sendDataToParentFromChild: (data: any) => void
 }) => {
   const [year, setYear] = useState('2017')
-  const [grandTotal, setGrandTotal] = useState(0)
-  const [itemsSold, setItemsSold] = useState(0)
-  const [profit, setProfit] = useState(0)
   const [graphData] = useState(initialGraphData)
 
   // get the year values from the data amd sort them
@@ -34,12 +31,6 @@ const Recharts = ({
   })
   yearVal.sort((a, b) => Number(a) - Number(b))
 
-  // intialize the stats for the card 
-  const stats = [
-    { id: 1, name: 'Total Sales', stat:Math.trunc(grandTotal), icon: DollarSign },
-    { id: 2, name: 'No of Items sold', stat: itemsSold, icon: PanelTop },
-    { id: 3, name: 'Overall Profit', stat: Math.trunc(profit), icon: Activity },
-  ]
 
   // fitler the data based on the year and calculate the stats
   useEffect(() => {
@@ -71,9 +62,6 @@ const Recharts = ({
       item.Profit_ratio = parseFloat((item.Profit/item.Total).toFixed(3));
     });
 
-    setProfit(graphData.reduce((acc, item) => acc + item.Profit, 0));
-    setItemsSold(graphData.reduce((acc, item) => acc + item.itemsSold, 0));
-    setGrandTotal(graphData.reduce((acc, item) => acc + item.Total, 0))
 
     {/*Region data for the whole year */}
     const regionData:{
@@ -147,26 +135,6 @@ const Recharts = ({
 
     </div>
 
-    <div className=''>
-      <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {stats.map((item) => (
-          <div
-            key={item.id}
-            className=" overflow-hidden rounded-lg bg-gray-50 px-4 pb-2 pt-2 shadow sm:px-6 sm:pt-6"
-          >
-            <dt>
-              <div className="absolute rounded-md bg-[#8884d8] p-3">
-                <item.icon className="h-6 w-6 text-white" aria-hidden="true" />
-              </div>
-              <p className="ml-16 truncate text-sm font-medium text-gray-500">{item.name}</p>
-            </dt>
-            <dd className="ml-16 flex items-baseline pb-6 sm:pb-7">
-              {item.id  == 2 ? <p className="text-2xl font-semibold text-gray-900">{item.stat}</p>:<p className="text-2xl font-semibold text-gray-900">${item.stat}</p>}
-            </dd>
-          </div>
-        ))}
-      </dl>
-    </div>
 
   {
     title.map((item) => (

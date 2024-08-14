@@ -2,24 +2,26 @@ import React from 'react'
 import Data from '../libs/data'
 import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
-
-const OrderByCat = () => {
+const SalesByCat = () => {
     const catData:any = []
-    const cat = Data.map((data) => data.Category)
+
+    const cat = Data.map((data) => data['Category'])
     const uniqueCat = [...new Set(cat)]
-    uniqueCat.map((ct) => {
-        catData.push({name: ct, Order: 0})
+
+    uniqueCat.map((cat) => {
+        catData.push({name: cat, Sales: 0})
     })
 
     Data.map((data) => {
-        catData[uniqueCat.indexOf(data.Category)].Order += 1
+        catData[uniqueCat.indexOf(data['Category'])].Sales += Number(data['Sales'])
     })
+
 
   return (
     <div>
-        <BarChart
-          width={700}
-          height={290}
+         <BarChart
+           width={500}
+           height={290}
           data={catData}
           margin={{
             top: 5,
@@ -33,10 +35,10 @@ const OrderByCat = () => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="Order" fill="#8884d8" activeBar={<Rectangle fill="#8884d8" stroke="blue" />} />
+          <Bar dataKey="Sales" fill="#8884d8" activeBar={<Rectangle fill="#8884d8" stroke="blue" />} />
         </BarChart>
     </div>
   )
 }
 
-export default OrderByCat
+export default SalesByCat

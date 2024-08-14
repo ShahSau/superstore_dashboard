@@ -38,7 +38,7 @@ const BarChartData = () => {
       <ResponsiveContainer width="100%" height="91%">
         <BarChart
           width={500}
-          height={300}
+          height={100}
           data={dataResult}
           margin={{
             top: 20,

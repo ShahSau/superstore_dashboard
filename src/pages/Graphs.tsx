@@ -34,7 +34,7 @@ const Graphs = () => {
               <select
                 id="selection"
                 name="selection"
-                className="text-lg block cursor-pointer border-1 border-b-[#8884d8] rounded-md border-l border-gray-200 py-2 pl-4 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 sm:text-sm sm:leading-6"
+                className="text-lg block cursor-pointer border-1 bg-[#8884d8] border-b-[#8884d8] rounded-md border-l border-gray-200 py-2 pl-4 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 sm:text-sm sm:leading-6"
                 defaultValue={selection}
                 onChange={(e) => {setSelection(e.target.value)}}
               >
