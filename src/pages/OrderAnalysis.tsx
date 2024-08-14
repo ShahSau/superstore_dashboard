@@ -1,6 +1,5 @@
 import React from 'react'
 import DashboardLayout from '../components/Layout'
-import CustomerYearLine from '../components/CustomerYearLine'
 import OrderByRegion from '../components/OrderByRegion'
 import OrderByState from '../components/OrderByState'
 import OrderByCat from '../components/OrderByCat'
@@ -10,13 +9,11 @@ import OrderYearLine from '../components/OrderYearLine'
 
 
 const OrderAnalysis = () => {
-    // most ordered product table
-    //total orders by year line chart
 
   return (
     <div>
         <DashboardLayout>
-          <h1 className="text-2xl font-bold m-6  top-0">Order Analysis</h1>
+          <h1 className="text-4xl font-semibold mb-2 m-6">Order Analysis</h1>
           <div className="flex">
             <div className="flex w-full">
                 <div className=" h-screen flex-grow overflow-x-hidden overflow-auto flex flex-wrap content-start p-2">

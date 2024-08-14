@@ -54,7 +54,7 @@ const User = () => {
 
     <div>
       <DashboardLayout>
-        <h1 className="text-2xl font-bold m-6  top-0">Customer</h1>
+        <h1 className="text-4xl font-semibold mb-2 m-6">Customer</h1>
         <TanStackTable data={newDataTable}/>
       </DashboardLayout>
     </div>

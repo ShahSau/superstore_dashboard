@@ -6,7 +6,7 @@ const Table = () => {
   return (
     <div>
       <DashboardLayout>
-        <h1 className="text-2xl font-bold m-6  top-0">Data Table</h1>
+        <h1 className="text-4xl font-semibold mb-2 m-6">Order Details</h1>
         <DataTable />
       </DashboardLayout>
     </div>

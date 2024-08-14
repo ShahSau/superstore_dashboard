@@ -26,7 +26,7 @@ const Graphs = () => {
   return (
     <div>
       <DashboardLayout>
-        <h1 className="text-2xl font-bold mb-4 ml-2">Graphs</h1>
+        <h1 className="text-4xl font-semibold mb-2 m-6">Elements</h1>
         <div className="grid h-screen">
           <div className="col-span-8">
             <div className='flex items-center justify-center mr-32'>

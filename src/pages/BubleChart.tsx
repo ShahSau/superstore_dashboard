@@ -7,7 +7,7 @@ const BubleChart = () => {
   return (
     <div>
         <DashboardLayout>
-            <h1 className="text-2xl font-bold m-6 top-0">User Analysis</h1>
+            <h1 className="text-4xl font-semibold mb-2 m-6">Bubble Chart</h1>
             <BubbleChart Data={Data}/>
         </DashboardLayout>
     </div>
