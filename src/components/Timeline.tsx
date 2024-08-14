@@ -9,11 +9,8 @@ import {
     Area,
   } from "recharts";
 
-
 const Timeline = ({Data, selection}: {Data: any[], selection:string}) => {
-
     const [graphData, setGraphData] = useState({})
-
 
     // custom function to get week number
     // because there are 52.1429 weeks in a year, we need to account for the 53rd week
@@ -90,14 +87,16 @@ const Timeline = ({Data, selection}: {Data: any[], selection:string}) => {
         obj = Object.fromEntries(Object.entries(obj).map(([key, value]) => [key, {...value, DaysToShip: (value.DaysToShipSum/value.items).toFixed(2), Discount: (value.DiscountSum/value.items).toFixed(2), ProfitRatio: (value.ProfitRatioSum/value.items).toFixed(2)}]))
         setGraphData(obj)
     }, [selection])
+    
     return (
-    <div className="mt-2">
-        {values.map((value) => {
-            return (
-                <div key={value} className=" bg-gray-50">
-                    <p className=" bg-gray-50 ml-4">{value}</p>
-                    {/*numerical sorting unless it's a month filter*/}
-                    <AreaChart width={700} height={200} data={selection === 'month' ? Object.values(graphData).sort((a:any,b:any) => monthsString.indexOf(a.month) - monthsString.indexOf(b.month)) : Object.values(graphData).sort((a:any,b:any) => Number(a[selection]) - Number(b[selection]))}
+    <div className="bg-white mb-12">
+        <div className="mx-auto max-w-7xl">
+          <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+            {values.map((value) => (
+              <div className="flex flex-col items-start justify-between overflow-hidden">
+                <div className="max-w-xl">
+                  <p className=" bg-gray-50 ml-4 text-center">{value}</p>
+                  <AreaChart width={550} height={200} data={selection === 'month' ? Object.values(graphData).sort((a:any,b:any) => monthsString.indexOf(a.month) - monthsString.indexOf(b.month)) : Object.values(graphData).sort((a:any,b:any) => Number(a[selection]) - Number(b[selection]))}
                     margin={{ top: 0, right: 30, left: 25, bottom: 0 }}>
                     <defs>
                     <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -116,10 +115,16 @@ const Timeline = ({Data, selection}: {Data: any[], selection:string}) => {
                     <Area type="monotone" dataKey={value} stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" dot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 2,r:2}} activeDot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 5,r:10}}/>
                     </AreaChart>
                 </div>
-            )
-        })}
-    </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     )
 }
 
 export default Timeline
+
+  
+
+  
