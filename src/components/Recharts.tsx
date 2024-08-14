@@ -6,7 +6,6 @@ import {
     YAxis,
     AreaChart,
     Area,
-
   } from "recharts";
 import Data from '../libs/data'
 import { Activity, DollarSign, PanelTop } from 'lucide-react';

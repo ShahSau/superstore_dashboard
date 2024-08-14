@@ -31,30 +31,29 @@ const Graphs = () => {
         <div className="grid h-screen grid-cols-2">
           {/* left side */}
           <div className="col-span-1 bg-gray-100">
-            
             <div className='flex items-center justify-center'>
-            Select Granularity:
-            <select
-            id="selection"
-            name="selection"
-            className="text-lg block cursor-pointer bg-[#8884d8] rounded-md border-l border-gray-200 py-2 pl-4 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 sm:text-sm sm:leading-6"
-            defaultValue={selection}
-            onChange={(e) => {setSelection(e.target.value)}}
-          >
-            <option>year</option>
-            <option>quarter</option>
-            <option>month</option>
-            <option>week</option>
-          </select>
+              Select Granularity:
+              <select
+                id="selection"
+                name="selection"
+                className="text-lg block cursor-pointer bg-[#8884d8] rounded-md border-l border-gray-200 py-2 pl-4 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 sm:text-sm sm:leading-6"
+                defaultValue={selection}
+                onChange={(e) => {setSelection(e.target.value)}}
+              >
+                <option>year</option>
+                <option>quarter</option>
+                <option>month</option>
+                <option>week</option>
+              </select>
             </div>
             <Timeline Data={Data} selection={selection}/>
-            </div>
+          </div>
             
           {/* right side */}
-          <div className="col-span-1 mt-2">
+          {/* <div className="col-span-1 mt-2">
             <h1 className="text-2xl font-bold">Bubble chart</h1>
             <BubbleChart Data={Data}/>
-          </div>
+          </div> */}
         </div>
         
       </DashboardLayout>

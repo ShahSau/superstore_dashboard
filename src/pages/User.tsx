@@ -50,8 +50,6 @@ const User = () => {
     data.Profit = Number(data.Profit.toFixed(2))
   })
   
-
-  console.log(Object.keys(tableData).length)
   return (
 
     <div>

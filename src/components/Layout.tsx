@@ -6,7 +6,8 @@ import {
     BarChart,
     Map,
     User,
-    BookUserIcon
+    BookUserIcon,
+    LucideSquareGanttChart
 } from "lucide-react";
 
 import { Link, useLocation } from 'react-router-dom';
@@ -24,7 +25,7 @@ const DashboardLayout = ({
           color: "text-sky-500"
         },
         {
-          label: 'Table',
+          label: 'Order Details',
           icon: Table,
           href: '/table',
           color: "text-violet-500",
@@ -54,13 +55,19 @@ const DashboardLayout = ({
             href: '/bar-chart',
         },
         {
+            label: 'Bubble Chart',
+            icon: LucideSquareGanttChart,
+            color: "text-blue-400",
+            href: '/bubble-chart',
+        },
+        {
             label: 'Customer Data',
             icon: User,
             color: "text-green-700",
             href: '/user',
         },
         {
-            label: 'User Analysis',
+            label: 'Customer Analysis',
             icon: BookUserIcon,
             color: "text-red-700",
             href: '/useranalysis',

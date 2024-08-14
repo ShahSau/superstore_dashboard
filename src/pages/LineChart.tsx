@@ -50,8 +50,7 @@ const LineChart = () => {
   }) => {
     setGraphData(data)
   }
-  
-  console.log(data,"DDDDD")
+
   return (
     <div>
       <DashboardLayout>

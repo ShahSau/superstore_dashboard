@@ -9,7 +9,7 @@ import BarChart from './pages/BarChart'
 import Map from './pages/Map'
 import User from './pages/User'
 import UserAnalysis from './pages/UserAnalysis'
-
+import BubleChart from './pages/BubleChart'
 
 const App = () => {
   return (
@@ -22,6 +22,7 @@ const App = () => {
         <Route path="/bar-chart" element={<BarChart />} />
         <Route path="/map" element={<Map />} />
         <Route path="/user" element={<User />} />
+        <Route path="/bubble-chart" element={<BubleChart />} />
         <Route path="/useranalysis" element={<UserAnalysis />} />
         <Route path="/dataconvert" element={<ExcelToJsonConverter />} />
       </Routes>

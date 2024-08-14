@@ -132,7 +132,7 @@ const BubbleChart = ({Data}: {Data: object[]}) => {
 
   return(
     <>
-    <div className="mb-16 m-4 flex flex-row">
+    <div className="mb-10 m-4 flex flex-row justify-center items-center">
       <div className="float-right mr-6">
           <label htmlFor="location" className="block text-lg font-medium text-gray-700 ">
               Y Axis
@@ -187,7 +187,7 @@ const BubbleChart = ({Data}: {Data: object[]}) => {
     </div>
     
     {/*bubble chart */}
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative" }} className="flex justify-center items-center">
       <svg width={700} height={700}>
         <g
           width={boundsWidth}
