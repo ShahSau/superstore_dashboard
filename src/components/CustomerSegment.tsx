@@ -1,6 +1,6 @@
 import React from 'react'
 import Data from '../libs/data'
-import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 const CustomerSegment = () => {
   const segData:any = []
   const segment = Data.map((data) => data['Segment'])
@@ -31,7 +31,6 @@ const CustomerSegment = () => {
           <Tooltip />
           <Legend />
           <Bar dataKey="Customer" fill="#8884d8" activeBar={<Rectangle fill="#8884d8" stroke="blue" />} />
-          {/* <Bar dataKey="uv" fill="#82ca9d" activeBar={<Rectangle fill="gold" stroke="purple" />} /> */}
         </BarChart>
     </div>
   )

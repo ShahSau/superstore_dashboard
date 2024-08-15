@@ -27,13 +27,13 @@ const Analysics = () => {
             </div>
           </div>
 
-          <div className="w-full p-2 lg:w-2/3">
+          <div className="w-full p-2 lg:w-1/2">
             <div className="rounded-lg h-80 mt-6">
             <h2 className="text-black font-bold text-center">Top 5 Customers by Sales</h2>
               <TopCustomerSalesTable />
             </div>
           </div>
-          <div className="w-full p-2 lg:w-1/3">
+          <div className="w-full p-2 lg:w-1/2 mt-16 md:mt-0">
             <div className="rounded-lg h-80">
             <h2 className="text-black font-bold">Customer by Sub Category</h2>
               <CustomerBySubCat />

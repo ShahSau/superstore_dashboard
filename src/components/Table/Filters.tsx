@@ -1,5 +1,5 @@
 import { X } from 'lucide-react';
-
+import React from 'react';
 
 const Filters = ({ columnFilters, setColumnFilters, filter, data,filter_name }: { columnFilters: any[], setColumnFilters: any, filter: string, data:any[],filter_name:string }) => {
 
@@ -44,9 +44,9 @@ const Filters = ({ columnFilters, setColumnFilters, filter, data,filter_name }: 
                                 <select id="filters" onChange={(e)=>onFilterChange(filter, e.target.value)} className=" text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                                     {
                                         data.map((d, index) => (
-                                            <>
+                                            <React.Fragment  key={index}>
                                             <option key={index} value={d}>{d}</option>
-                                            </>
+                                            </React.Fragment>
                                         ))
                                     }
                                 </select>
