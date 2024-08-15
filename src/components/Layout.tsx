@@ -139,7 +139,7 @@ const DashboardLayout = ({
                 ))}
             </div>
         </div>
-        <main className="h-full md:ml-72 overflow-x-hidden">
+        <main className="h-full md:ml-72 overflow-x-scroll">
             {children}
         </main>
     </div>
