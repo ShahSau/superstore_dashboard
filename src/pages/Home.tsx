@@ -59,10 +59,11 @@ const Home = () => {
                   className="overflow-hidden rounded-lg bg-gray-50 px-4 pb-2 pt-2 shadow sm:px-6 sm:pt-6  items-center"
                 >
                   <dt>
-                    <div className="absolute rounded-md bg-[#8884d8] p-3">
+                    <div className=" rounded-md bg-[#8884d8] p-3">
                       <item.icon className="h-6 w-6 text-white" aria-hidden="true" />
+                      <p className=" truncate text-md font-medium text-gray-700">{item.name}</p>
                     </div>
-                    <p className="ml-16 truncate text-sm font-medium text-gray-500">{item.name}</p>
+                    
                   </dt>
                   <dd className="ml-16 flex items-baseline pb-6 sm:pb-7">
                     {item.id  == 1 || item.id == 3 || item.id == 6 ? <p className="text-2xl font-semibold text-gray-900">${item.stat}</p>:<p className="text-2xl font-semibold text-gray-900">{item.stat}</p>}
