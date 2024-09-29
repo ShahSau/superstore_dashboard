@@ -1,6 +1,3 @@
-https://superstore-dashboard.vercel.app/
-
-
 <p align="center">
     <h1 align="center">SUPERSTORE_DASHBOARD</h1>
 </p>
